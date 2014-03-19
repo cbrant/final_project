@@ -1,0 +1,27 @@
+/*
+Disc.cpp
+Patrick Hansen
+3/18/14
+implemenation of Disc object
+*/
+
+#include "Disc.h"
+
+Disc::Disc() {
+	x = 0;
+	y = 0;
+	h = 1; //initial height of 1 meter
+	vx = 0;
+	vy = 0;
+}
+
+void Disc::letFly(double vxInit, double vyInit) {
+	vx = vxInit;
+	vy = vyInit;
+	
+	/*
+	Lots of cool physics goes here--the coefficients of drag, lift, etc. can all be 
+	initialized here because the only relevant result of this method is the landing spot
+	which is stored in private variables x and y
+	*/
+}
