@@ -139,9 +139,11 @@ int main( int argc, char* args[] )
     int xpos= ( SCREEN_WIDTH - frisbee->w ) / 2;
     int ypos= ( SCREEN_HEIGHT - frisbee->h ) / 2;
     
+    std::cout<<"Bug"<<std::endl;
     //initilize everything
     if( init() == false )
       return 1;
+    
     
     //load in our files
     if( load_files() == false )
@@ -164,7 +166,7 @@ int main( int argc, char* args[] )
          apply_surface( xpos, ypos, frisbee, screen);
          
          //get the state of all of the keys
-         Uint8 *keystates = SDL_GetKeyState( NULL );
+         //Uint8 *keystates = SDL_GetKeyState( NULL );
          
      }
      
