@@ -7,4 +7,4 @@ Group Members: Connor Brant, Patrick Hansen, Heather Fredrickson
 
 This is a Frolf (frisbee golf) simulation game coded in C++.
 
-Connor smells.
+Pat smells.
