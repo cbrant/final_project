@@ -5,7 +5,8 @@ initialTest.cpp
 
 This is an initial test of the SDL graphics being used in our project. The program will
 use the images that will be used in the project and will allow the user to move the 
-frisbee around the screen using the arrow keys.
+frisbee around the screen using the arrow keys. Used lazyfoo.net SDL lesson10 as 
+a guide.
 
 */
 
@@ -137,7 +138,7 @@ int main( int argc, char* args[] )
     //quit flag
     bool quit = false;
     
-    std::cout<<"Bug"<<std::endl;
+    //std::cout<<"Bug"<<std::endl;
     //initilize everything
     if( init() == false )
       return 1;
@@ -146,6 +147,7 @@ int main( int argc, char* args[] )
     if( load_files() == false )
       return 1;
       
+    //center the frisbee on the screen  
     int xpos= ( SCREEN_WIDTH - frisbee->w ) / 2;
     int ypos= ( SCREEN_HEIGHT - frisbee->h ) / 2;
             
@@ -166,7 +168,42 @@ int main( int argc, char* args[] )
          apply_surface( xpos, ypos, frisbee, screen);
          
          //get the state of all of the keys
-         //Uint8 *keystates = SDL_GetKeyState( NULL );
+         Uint8 *keystates = SDL_GetKeyState( NULL );
+         
+        //If up is pressed
+        if( keystates[ SDLK_UP ] )
+        {
+            if( ypos > 0 )
+              ypos-=10;
+        }
+
+        //If down is pressed
+        if( keystates[SDLK_DOWN] )
+        {
+            if( ( ypos + frisbee->h ) < (SCREEN_HEIGHT - 10) )
+              ypos+=10;
+        }
+
+        //If left is pressed
+        if( keystates[ SDLK_LEFT ] )
+        {
+            if( xpos > 10 )
+              xpos-=10;
+        }
+
+        //If right is pressed
+        if( keystates[SDLK_RIGHT] )
+        {
+            if( ( xpos + frisbee->w ) < (SCREEN_WIDTH - 10 ) )
+              xpos+=10;
+        }
+
+        //Update the screen
+        if( SDL_Flip( screen ) == -1 )
+        {
+            std::cout<<"Error in updating sceen"<<std::endl;
+            return 1;
+        }
          
      }
      
