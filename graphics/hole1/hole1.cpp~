@@ -28,13 +28,13 @@ const int SCREEN_BPP = 32;
 //Surfaces
 SDL_Surface *background = NULL;
 SDL_Surface *frisbee = NULL;
-SDL_Surface *arrow = NULL;
-SDL_Surface *arrow_left3 = NULL;
-SDL_Surface *arrow_left2 = NULL;
-SDL_Surface *arrow_left1 = NULL;
-SDL_Surface *arrow_right3 = NULL;
-SDL_Surface *arrow_right2 = NULL;
-SDL_Surface *arrow_right1 = NULL;
+SDL_Surface *arrow0 = NULL;
+SDL_Surface *left45 = NULL;
+SDL_Surface *left30 = NULL;
+SDL_Surface *left15 = NULL;
+SDL_Surface *right45 = NULL;
+SDL_Surface *right30 = NULL;
+SDL_Surface *right15 = NULL;
 SDL_Surface *message = NULL;
 SDL_Surface *p0 = NULL;
 SDL_Surface *p1 = NULL;
@@ -168,13 +168,13 @@ bool load_files()
     p15 = load_image("15.bmp");
     
     //arrow images
-    arrow = load_image("arrow.jpg");
-    /*arrow_left1 = load_image("arrow_left1.jpg");
-    arrow_left2 = load_image("arrow_left2.jpg");
-    arrow_left3 = load_image("arrow_left3.jpg");
-    arrow_right1 = load_image("arrow_right1.jpg");
-    arrow_right2 = load_image("arrow_right2.jpg");
-    arrow_right3 = load_image("arrow_right3.jpg");*/
+    arrow0 = load_image("0.png");
+    left15 = load_image("15_left.png");
+    left30 = load_image("30_left.png");
+    left45 = load_image("45_left.png");
+    right15 = load_image("15_right.png");
+    right30 = load_image("30_right.png");
+    right45 = load_image("45_right.png");
     
     //Open the font
     font = TTF_OpenFont( "lazy.ttf", 42 );
@@ -223,7 +223,7 @@ int main( int argc, char* args[] )
     SDL_Surface* currentPowerbar = p0;
     
     //current arrow image
-    SDL_Surface* currentArrow = arrow;
+    SDL_Surface* currentArrow = arrow0;
     int arrowCount = 0;
       
     //center the frisbee on the screen  
@@ -235,8 +235,8 @@ int main( int argc, char* args[] )
     int yposPowerbar = 10;
     
     //center arrow to start 
-    int xposArrow= ( SCREEN_WIDTH - arrow->w ) / 2 ;
-    int yposArrow= ( SCREEN_HEIGHT - frisbee->h  / 2 ) - arrow->h ; 
+    int xposArrow= ( SCREEN_WIDTH - arrow0->w ) / 2 ;
+    int yposArrow= ( SCREEN_HEIGHT - frisbee->h  / 2 ) - ( 3 * arrow0->h / 4) ; 
     
     //power variable
     int power = 0;
@@ -284,25 +284,28 @@ int main( int argc, char* args[] )
          switch( arrowCount )
          {
              case -3:
-                 currentArrow = arrow_left3;
+                 currentArrow = left45;
              break;
              case -2:
-                 currentArrow = arrow_left2;
+                 currentArrow = left30;
              break;
              case -1:
-                 currentArrow = arrow_left1;
+                 currentArrow = left15;
              break;
              case 0:
-                 currentArrow = arrow;
+                 currentArrow = arrow0;
              break;
              case 1:
-                 currentArrow = arrow_right1;
+                 currentArrow = right15;
              break;
              case 2:
-                 currentArrow = arrow_right2;
+                 currentArrow = right30;
              break;
              case 3:
-                 currentArrow = arrow_right3;
+                 currentArrow = right45;
+             break;
+             default:
+                 currentArrow = arrow0;
              break;
          }       
                  
