@@ -17,6 +17,8 @@ class Player {
 	public:
 		Player(string, int, int);
 		
+		void print();
+		
 	private:
 		int power;
 		int accuracy;

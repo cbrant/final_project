@@ -16,6 +16,11 @@ int main(void) {
 	Disc disc;
 	Player player = Player("Jimmy Mickle", 3, 5);
 	Hole hole = Hole(150, 50, 5);
-	disc.letFly(14, 12);
-	disc.discPrint();
+	
+	disc.letFly(14, 12.5);
+	disc.print();
+	
+	player.print();
+	
+	hole.print();
 }

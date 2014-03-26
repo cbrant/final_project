@@ -6,10 +6,18 @@ interface of Hole object
 */
 
 #include "Hole.h"
+#include <iostream>
 
-Hole::Hole(int x, int y, int h) {
-	x = x;
-	y = y;
-	h = h;
+using namespace std;
+
+Hole::Hole(int X, int Y, int H) {
+	x = X;
+	y = Y;
+	h = H;
 	isHit = 0; //initially unhit
+}
+
+void Hole::print() {
+	cout << "The hole is located " << x << " meters forward and " << y << " meters to the left/right" << endl;
+	cout << "You are aiming for " << h << " meters off of the ground" << endl;
 }

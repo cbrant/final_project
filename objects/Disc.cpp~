@@ -63,6 +63,7 @@ void Disc::letFly(double power, double uAlpha) {
 
 }
 
-void Disc::discPrint() {
+void Disc::print() {
 	cout << "Distance traveled was " << x << " and y should be 0 (" << y << ")" << endl;
+	cout << "x-velocity when it hit the ground was " << vx << " and y-velocity was " << vy << endl;
 }

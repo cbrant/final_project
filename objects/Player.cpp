@@ -6,9 +6,16 @@ implementation of Player object
 */
 
 #include "Player.h"
+#include <iostream>
 
-Player::Player (string name, int power, int accuracy) {
-	name = name;
-	power = power;
-	accuracy = accuracy;
+using namespace std;
+
+Player::Player (string n, int pow, int acc) {
+	name = n;
+	power = pow;
+	accuracy = acc;
+}
+
+void Player::print() {
+	cout << "Player name: " << name << endl << "Power: " << power << " Accuracy: " << accuracy << endl;
 }
