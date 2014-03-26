@@ -19,5 +19,5 @@ Hole::Hole(int X, int Y, int H) {
 
 void Hole::print() {
 	cout << "The hole is located " << x << " meters forward and " << y << " meters to the left/right" << endl;
-	cout << "You are aiming for " << h << " meters off of the ground" << endl;
+	cout << "You are aiming for a hole that is " << h << " meters off of the ground" << endl;
 }

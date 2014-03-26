@@ -10,10 +10,10 @@ interface of Hole object
 
 using namespace std;
 
-Hole::Hole(int x, int y, int h) {
-	x = x;
-	y = y;
-	h = h;
+Hole::Hole(int X, int Y, int H) {
+	x = X;
+	y = Y;
+	h = H;
 	isHit = 0; //initially unhit
 }
 

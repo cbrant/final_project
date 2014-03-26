@@ -15,7 +15,7 @@ using namespace std;
 int main(void) {
 	Disc disc;
 	Player player = Player("Jimmy Mickle", 3, 5);
-	Hole hole = Hole(150, 50, 5);
+	Hole hole = Hole(150, 50, 1);
 	
 	disc.letFly(14, 12.5);
 	disc.print();

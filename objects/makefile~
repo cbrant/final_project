@@ -1,5 +1,3 @@
-all: main
-
 main: main.o Disc.o Hole.o Player.o
 	g++ main.o Disc.o Hole.o Player.o -o main
 main.o: main.cpp Disc.h Hole.h Player.h
