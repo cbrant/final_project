@@ -18,6 +18,7 @@ power bar. Used lazyfoo.net tutorials as a guide.
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
 
 const int SCREEN_WIDTH = 771;
 const int SCREEN_HEIGHT = 593;
@@ -396,6 +397,7 @@ int main( int argc, char* args[] )
                    return 1;
                 }
                  
+                 usleep(10000);
              }
          }
          
