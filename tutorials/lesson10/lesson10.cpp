@@ -107,7 +107,7 @@ bool init()
 bool load_files()
 {
     //Load the background image
-    background = load_image( "background.png" );
+    background = load_image( "Start.png" );
 
     //Open the font
     font = TTF_OpenFont( "lazy.ttf", 72 );

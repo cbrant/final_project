@@ -14,6 +14,7 @@ class Disc {
 		Disc();
 		
 		void letFly(double, double);
+		void discPrint();
 	
 		//can we just use protected?
 		double getX();
@@ -26,8 +27,6 @@ class Disc {
 		double y; //ypos
 		double vx; //xvel
 		double vy; //yvel
-		
-		double h; //disc height
 };
 
 #endif

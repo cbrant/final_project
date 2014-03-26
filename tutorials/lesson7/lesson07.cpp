@@ -159,7 +159,7 @@ int main( int argc, char* args[] )
     }
 
     //Render the text
-    message = TTF_RenderText_Solid( font, "The quick brown fox jumps over the lazy dog", textColor );
+    message = TTF_RenderText_Solid( font, "Thee quick brown fox jumps over the lazy dog", textColor );
 
     //If there was an error in rendering the text
     if( message == NULL )
