@@ -6,11 +6,18 @@ implementation of Player object
 */
 
 #include "Player.h"
+#include <iostream>
+
+using namespace std;
 
 Player::Player (string n, int pow, int acc) {
 	name = n;
 	power = pow;
 	accuracy = acc;
+}
+
+void Player::toss() {
+	disc.letFly(10, 12.5, power, accuracy);
 }
 
 void Player::print() {

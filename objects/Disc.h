@@ -13,7 +13,7 @@ class Disc {
 	public:
 		Disc();
 		
-		void letFly(double, double);
+		void letFly(double, double, int, int);
 		void print();
 	
 		//can we just use protected?

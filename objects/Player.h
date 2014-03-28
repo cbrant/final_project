@@ -9,6 +9,7 @@ interface of Player object
 #define PLAYER_H
 
 #include <string>
+#include "Disc.h"
 
 using namespace std;
 
@@ -17,12 +18,15 @@ class Player {
 	public:
 		Player(string, int, int);
 		
+		void toss();
 		void print();
 		
 	private:
 		int power;
 		int accuracy;
 		string name;
+		
+		Disc disc;
 
 };
 

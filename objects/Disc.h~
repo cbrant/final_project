@@ -14,7 +14,7 @@ class Disc {
 		Disc();
 		
 		void letFly(double, double);
-		void discPrint();
+		void print();
 	
 		//can we just use protected?
 		double getX();

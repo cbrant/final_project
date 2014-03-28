@@ -8,6 +8,7 @@ implemenation of Disc object
 #include "Disc.h"
 #include <cmath>
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -18,12 +19,21 @@ Disc::Disc() {
 	vy = 0;
 }
 
-void Disc::letFly(double power, double uAlpha) {
+void Disc::letFly(double power, double uAlpha, int playerPower, int playerAccuracy) {
+	
+	//get random seed
+	srand(time(NULL));
+	
+	//adjusting power and alpha based on Player's attributes
+	double adjPower = (double)playerPower/3.0*power; //average power will result in same as powerbar
+	double randFactor = ((double)(rand()%3 - 1))*(6 - playerAccuracy);
+	double alpha = uAlpha + randFactor;//angle of attack, specified by user, modified by player accuracy
+	cout << randFactor << " was the random factor" << endl;
 
 	x = 0; //x position (m)
 	y = 1; //y position (m)
-	vx = cos(uAlpha*M_PI/180)*power; //x velocity (m/s)
-	vy = sin(uAlpha*M_PI/180)*power; //y velocity (m/s)
+	vx = cos(uAlpha*M_PI/180)*adjPower; //x velocity (m/s)
+	vy = sin(uAlpha*M_PI/180)*adjPower; //y velocity (m/s)
 	float g = -9.81; //acceleration due to gravity 
 	float m = 0.175; //mass of disc (kg)
 	float rho = 1.23; //density of fluid--air (kg/m^3)
@@ -33,16 +43,16 @@ void Disc::letFly(double power, double uAlpha) {
 	float cd0 = 0.08; //drag coefficient at alpha = 0
 	float cdA = 2.72; //drag coefficient dependent on alpha
 	int alpha0 = -4;
-	double deltavx;
-	double deltavy;
-	double alpha = uAlpha;
-	double pi = M_PI;
-
+	double deltavx; //change in vx
+	double deltavy; //change in vy
+	double pi = M_PI; //pi
+		
+	//calculate coefficients of lift and drag
 	double cl = cl0 + clA*alpha*pi/180; 
 	double cd = pow(cd0 + cdA*((alpha + alpha0)*pi/180),2.0);
-
+	
+	//loop variables
 	float dt = 0.01;
-
 	int count = 0; //loop iteration count
 
 	while (y > 0) {
