@@ -13,8 +13,9 @@ class Disc {
 	public:
 		Disc();
 		
-		void letFly(double, double, int, int);
+		void letFly(double, double, int, int, int , int);
 		void print();
+		int checkHole(int, int);
 	
 		//can we just use protected?
 		double getX();

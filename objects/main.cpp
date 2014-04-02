@@ -9,19 +9,20 @@ purp: for testing the objectes
 #include "Hole.h"
 #include "Player.h"
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
 int main(void) {
 	Disc disc;
-	Player player = Player("Jimmy Mickle", 3, 5);
+	Player player = Player("Jimmy Mickle", 4, 4);
 	Hole hole = Hole(150, 50, 1);
 	
-	player.toss();
+	player.toss(hole.getX(), hole.getY());
 
-	disc.print();
+	//disc.print();
 	
-	player.print();
+	//player.print();
 	
-	hole.print();
+	//hole.print();
 }

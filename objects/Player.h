@@ -18,7 +18,7 @@ class Player {
 	public:
 		Player(string, int, int);
 		
-		void toss();
+		void toss(int, int);
 		void print();
 		
 	private:

@@ -14,6 +14,8 @@ class Hole {
 		Hole(int, int, int);
 		
 		void print();
+		int getX();
+		int getY();
 		
 	private:
 		int isHit; //bool to store whether or not the disc has contacted the hole

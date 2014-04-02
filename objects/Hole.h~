@@ -13,6 +13,8 @@ class Hole {
 		
 		Hole(int, int, int);
 		
+		void print();
+		
 	private:
 		int isHit; //bool to store whether or not the disc has contacted the hole
 		int x; //hole's xpos
