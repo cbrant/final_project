@@ -35,6 +35,12 @@ SDL_Surface *left15 = NULL;
 SDL_Surface *right45 = NULL;
 SDL_Surface *right30 = NULL;
 SDL_Surface *right15 = NULL;
+SDL_Surface *angle0 = NULL;
+SDL_Surface *angle3 = NULL;
+SDL_Surface *angle6 = NULL;
+SDL_Surface *angle9 = NULL;
+SDL_Surface *angle12 = NULL;
+SDL_Surface *angle15 = NULL;
 SDL_Surface *message = NULL;
 SDL_Surface *p0 = NULL;
 SDL_Surface *p1 = NULL;
@@ -176,6 +182,14 @@ bool load_files()
     right30 = load_image("30_right.png");
     right45 = load_image("45_right.png");
     
+    //angle images
+    /*angle0 = load_image();
+    angle3 = load_image();
+    angle6 = load_image();
+    angle9 = load_image();
+    angle12 = load_image();
+    angle15 = load_image();*/
+    
     //Open the font
     font = TTF_OpenFont( "lazy.ttf", 42 );
     
@@ -225,6 +239,10 @@ int main( int argc, char* args[] )
     //current arrow image
     SDL_Surface* currentArrow = arrow0;
     int arrowCount = 0;
+    
+    //current angle image
+    SDL_Surface* currentAngle = angle0;
+    int angleCount = 0;
       
     //center the frisbee on the screen  
     int xposFris= ( SCREEN_WIDTH - frisbee->w ) / 2 ;
@@ -237,6 +255,10 @@ int main( int argc, char* args[] )
     //center arrow to start 
     int xposArrow= ( SCREEN_WIDTH - arrow0->w ) / 2 ;
     int yposArrow= ( SCREEN_HEIGHT - frisbee->h  / 2 ) - ( 3 * arrow0->h / 4) ; 
+    
+    //place angle arrow on right of screen
+    //int xposAngle= ( SCREEN_WIDTH - angle0->w);
+    //int yposAngle= ( SCREEN_WIDTH - angle0->h) / 2;
     
     //power variable
     int power = 0;
@@ -260,11 +282,12 @@ int main( int argc, char* args[] )
              }
          }
             
-         //apply the background and frisbee and current powerbar
+         //apply the background and frisbee and current powerbar and arrow and angle
          apply_surface( 0, 0, background, screen);
          apply_surface( xposFris, yposFris, frisbee, screen);
          apply_surface( xposPowerbar, yposPowerbar, currentPowerbar, screen);
          apply_surface( xposArrow, yposArrow, currentArrow, screen);
+         //apply_surface( xposAngle, yposAngle, currentAngle, screen);
          
          //get the state of all of the keys
          SDL_PumpEvents();
@@ -279,6 +302,18 @@ int main( int argc, char* args[] )
          {
              if(arrowCount<3)
                arrowCount++;
+         }
+         
+         if( keystates[SDLK_UP])
+         {
+             if(angleCount<5)
+             	angleCount++;
+         }
+         
+         if( keystates[SDLK_DOWN])
+         {
+             if(angleCount>0)
+             	angleCount--;
          }
          
          switch( arrowCount )
@@ -307,12 +342,37 @@ int main( int argc, char* args[] )
              default:
                  currentArrow = arrow0;
              break;
-         }       
-                 
+         }   
+         
+         switch( angleCount )
+         {
+             case 0:
+             	currentAngle = angle0;    
+             break;
+             case 1:
+             	currentAngle = angle3;    
+             break;
+             case 2:
+             	currentAngle = angle6;    
+             break;
+             case 3:
+             	currentAngle = angle9;    
+             break;
+             case 4:
+             	currentAngle = angle12;    
+             break;
+             case 5:
+             	currentAngle = angle15;    
+             break;
+             default:
+             	currentAngle = angle0;
+         }
+         
          if( keystates[SDLK_SPACE] )
          {
              //std::cout<<"Space"<<std::endl;
              int i = 0;
+             //boolean for increasing powerbar
              bool inc = true;
              //boolean for power loop quit
     	     bool PowerbarGoing = true;
@@ -355,6 +415,7 @@ int main( int argc, char* args[] )
                 //apply the background and frisbee
                apply_surface( 0, 0, background, screen);
                apply_surface( xposFris, yposFris, frisbee, screen);
+               
                //determine current power
                switch(i)
                {
@@ -468,6 +529,7 @@ int main( int argc, char* args[] )
             return 1;
         }
          
+        usleep(50000); 
      }
      
      //clean up the surfaces
