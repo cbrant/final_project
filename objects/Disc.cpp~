@@ -24,7 +24,7 @@ void Disc::letFly(double power, double uAlpha, int playerPower, int playerAccura
 	//get random seed
 	srand(time(NULL));
 	double random = ((rand()%4) * 1.0 - 1.5)*(6 - playerAccuracy);
-	cout << "Random is " << random << endl;
+	//cout << "Random is " << random << endl;
 	
 	//adjusting power and alpha based on Player's attributes
 	double adjPower = (double)playerPower - 3.0 + power; //average power will result in same as powerbar
@@ -59,6 +59,8 @@ void Disc::letFly(double power, double uAlpha, int playerPower, int playerAccura
 
 	while (y > 0) {
 		
+		cout << x << ", " << y << endl;
+		
 		deltavx = -rho*pow(vx,2.0)*area*cd*dt;
 		deltavy = (g + rho*pow(vx,2.0)*area*cl/(2*m))*dt;
 		
@@ -76,7 +78,7 @@ void Disc::letFly(double power, double uAlpha, int playerPower, int playerAccura
 		}
 	}
 
-	//cout << "Time was " << count*dt << " seconds." << endl;
+	cout << "Time was " << count*dt << " seconds." << endl;
 
 }
 
@@ -86,7 +88,7 @@ void Disc::print() {
 }
 
 int Disc::checkHole(int xHole, int yHole) {
-	if(abs(x - xHole) < 5 && abs(y - yHole) < 5 {
+	if(abs(x - xHole) < 5 && abs(y - yHole) < 5) {
 		return 1;
 	}
 	return 0;

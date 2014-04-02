@@ -18,6 +18,7 @@ Player::Player (string n, int pow, int acc) {
 
 void Player::toss(int x, int y) {
 	disc.letFly(10, 12.5, power, accuracy, x, y);
+	disc.print();
 	return;
 }
 

@@ -14,15 +14,12 @@ purp: for testing the objectes
 using namespace std;
 
 int main(void) {
-	Disc disc;
 	Player player = Player("Jimmy Mickle", 4, 4);
 	Hole hole = Hole(150, 50, 1);
+	player.print();
+	player.toss(hole.getX(), hole.getY());
 	
-	player.toss();
 
-	//disc.print();
-	
-	//player.print();
 	
 	//hole.print();
 }

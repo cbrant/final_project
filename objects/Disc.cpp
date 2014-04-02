@@ -24,7 +24,7 @@ void Disc::letFly(double power, double uAlpha, int playerPower, int playerAccura
 	//get random seed
 	srand(time(NULL));
 	double random = ((rand()%4) * 1.0 - 1.5)*(6 - playerAccuracy);
-	cout << "Random is " << random << endl;
+	//cout << "Random is " << random << endl;
 	
 	//adjusting power and alpha based on Player's attributes
 	double adjPower = (double)playerPower - 3.0 + power; //average power will result in same as powerbar
@@ -76,7 +76,7 @@ void Disc::letFly(double power, double uAlpha, int playerPower, int playerAccura
 		}
 	}
 
-	//cout << "Time was " << count*dt << " seconds." << endl;
+	cout << "Time was " << count*dt << " seconds." << endl;
 
 }
 
