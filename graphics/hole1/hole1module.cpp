@@ -1,12 +1,14 @@
 /* Connor Brant
 CSE20212
 Final Project
-hole1.cpp
+hole1module.cpp
 
 Main program used to create hole1 of the course. Functionality is
 hardcoded now but will draw from object classes as development 
 continues. Currently user should be able to aim disc and start/stop
 power bar. Used lazyfoo.net tutorials as a guide.
+
+TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 
 */
 
@@ -114,6 +116,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination,
 bool init()
 {
     std::cout<<"Initilizing..."<<std::endl;
+    
     //Initilize SDL
     if( SDL_Init( SDL_INIT_EVERYTHING ) == -1)
     {
@@ -145,12 +148,12 @@ bool init()
     return true;
 }
 
-bool load_files()
+bool load_files( std::string backgroundFile )
 {
     std::cout<<"Loading files..."<<std::endl;
     
     //Background
-    background = load_image( "Start.png" );
+    background = load_image( backgroundFile );
     
     //Frisbee
     frisbee = load_image("ultimate_disc_white.png" );
@@ -220,7 +223,7 @@ void clean_up()
 }
 
 
-int main( int argc, char* args[] )
+int play( std::string backgroundFile )
 {
     //quit program flag
     bool quit = false;
@@ -230,7 +233,7 @@ int main( int argc, char* args[] )
       return 1;
         
     //load in our files
-    if( load_files() == false )
+    if( load_files( backgroundFile ) == false )
       return 1;
       
      //current powerbar image
@@ -384,7 +387,14 @@ int main( int argc, char* args[] )
                 //SDL_PollEvent( &event );
                  
                  if( keystates[SDLK_RETURN] )
-                   PowerbarGoing = false;
+                 {
+                     if(arrowCount<0)
+                       return 1;
+                     else
+                     	return 0;
+                     	//PowerbarGoing = false;
+                 }
+                   
                  
                  //bounce power between max and min power 
                  if( i<maxPower && inc)
@@ -537,4 +547,17 @@ int main( int argc, char* args[] )
      
      return 0;
 }
-             
+
+int main( int argv, char* argc[])
+{
+    int left;
+    left = play("Start.png");
+    if(left)
+    	play("Hole1Left.png");
+    else
+    	play("Hole1Right.png");
+    
+    clean_up();
+    
+    return 0;
+}
