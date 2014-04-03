@@ -186,12 +186,12 @@ bool load_files( std::string backgroundFile )
     right45 = load_image("45_right.png");
     
     //angle images
-    /*angle0 = load_image();
-    angle3 = load_image();
-    angle6 = load_image();
-    angle9 = load_image();
-    angle12 = load_image();
-    angle15 = load_image();*/
+    angle0 = load_image("Angle_arrow0.bmp");
+    angle3 = load_image("Angle_arrow3.bmp");
+    angle6 = load_image("Angle_arrow6.bmp");
+    angle9 = load_image("Angle_arrow9.bmp");
+    angle12 = load_image("Angle_arrow12.bmp");
+    angle15 = load_image("Angle_arrow15.bmp");
     
     //Open the font
     font = TTF_OpenFont( "lazy.ttf", 42 );
@@ -260,8 +260,8 @@ int play( std::string backgroundFile )
     int yposArrow= ( SCREEN_HEIGHT - frisbee->h  / 2 ) - ( 3 * arrow0->h / 4) ; 
     
     //place angle arrow on right of screen
-    //int xposAngle= ( SCREEN_WIDTH - angle0->w);
-    //int yposAngle= ( SCREEN_WIDTH - angle0->h) / 2;
+    int xposAngle= ( SCREEN_WIDTH - angle0->w);
+    int yposAngle= ( SCREEN_WIDTH - angle0->h) / 2;
     
     //power variable
     int power = 0;
@@ -290,7 +290,7 @@ int play( std::string backgroundFile )
          apply_surface( xposFris, yposFris, frisbee, screen);
          apply_surface( xposPowerbar, yposPowerbar, currentPowerbar, screen);
          apply_surface( xposArrow, yposArrow, currentArrow, screen);
-         //apply_surface( xposAngle, yposAngle, currentAngle, screen);
+         apply_surface( xposAngle, yposAngle, currentAngle, screen);
          
          //get the state of all of the keys
          SDL_PumpEvents();
