@@ -51,6 +51,31 @@ SDL_Surface *frisbee17 = NULL;
 SDL_Surface *frisbee18 = NULL;
 SDL_Surface *frisbee19 = NULL;
 SDL_Surface *frisbee20 = NULL;
+SDL_Surface *frisbee21 = NULL;
+SDL_Surface *frisbee22 = NULL;
+SDL_Surface *frisbee23 = NULL;
+SDL_Surface *frisbee24 = NULL;
+SDL_Surface *frisbee25 = NULL;
+SDL_Surface *frisbee26 = NULL;
+SDL_Surface *frisbee27 = NULL;
+SDL_Surface *frisbee28 = NULL;
+SDL_Surface *frisbee29 = NULL;
+SDL_Surface *frisbee30 = NULL;
+SDL_Surface *frisbee31 = NULL;
+SDL_Surface *frisbee32 = NULL;
+SDL_Surface *frisbee33 = NULL;
+SDL_Surface *frisbee34 = NULL;
+SDL_Surface *frisbee35 = NULL;
+SDL_Surface *frisbee36 = NULL;
+SDL_Surface *frisbee37 = NULL;
+SDL_Surface *frisbee38 = NULL;
+SDL_Surface *frisbee39 = NULL;
+SDL_Surface *frisbee40 = NULL;
+SDL_Surface *frisbee41 = NULL;
+SDL_Surface *frisbee42 = NULL;
+SDL_Surface *frisbee43 = NULL;
+SDL_Surface *frisbee44 = NULL;
+SDL_Surface *frisbee45 = NULL;
 SDL_Surface *arrow0 = NULL;
 SDL_Surface *left45 = NULL;
 SDL_Surface *left30 = NULL;
@@ -86,7 +111,6 @@ SDL_Surface *screen = NULL;
 //Initialize font
 TTF_Font *font = NULL;
 SDL_Color textColor = { 255, 255, 255 };
-
 
 //Music that will be played
 Mix_Music *music = NULL;
@@ -166,12 +190,12 @@ bool init()
       return false;
     }
     
-	//Initialize SDL_mixer
+    //Initialize SDL_mixer
 	
-	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
-	{
-		return false;
-	}
+    if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+    {
+	return false;
+     }
 
     //set a window caption
     SDL_WM_SetCaption( "Hole 1", NULL );
@@ -208,6 +232,31 @@ bool load_files( std::string backgroundFile )
     frisbee18 = load_image("ultimate_disc_white_18.png" );
     frisbee19 = load_image("ultimate_disc_white_19.png" );
     frisbee20 = load_image("ultimate_disc_white_20.png" );
+    frisbee21 = load_image("ultimate_disc_white_21.png" );
+    frisbee22 = load_image("ultimate_disc_white_22.png" );
+    frisbee23 = load_image("ultimate_disc_white_23.png" );
+    frisbee24 = load_image("ultimate_disc_white_24.png" );
+    frisbee25 = load_image("ultimate_disc_white_25.png" );
+    frisbee26 = load_image("ultimate_disc_white_26.png" );
+    frisbee27 = load_image("ultimate_disc_white_27.png" );
+    frisbee28 = load_image("ultimate_disc_white_28.png" );
+    frisbee29 = load_image("ultimate_disc_white_29.png" );
+    frisbee30 = load_image("ultimate_disc_white_30.png" );
+    frisbee31 = load_image("ultimate_disc_white_31.png" );
+    frisbee32 = load_image("ultimate_disc_white_32.png" );
+    frisbee33 = load_image("ultimate_disc_white_33.png" );
+    frisbee34 = load_image("ultimate_disc_white_34.png" );
+    frisbee35 = load_image("ultimate_disc_white_35.png" );
+    frisbee36 = load_image("ultimate_disc_white_36.png" );
+    frisbee37 = load_image("ultimate_disc_white_37.png" );
+    frisbee38 = load_image("ultimate_disc_white_38.png" );
+    frisbee39 = load_image("ultimate_disc_white_39.png" );
+    frisbee40 = load_image("ultimate_disc_white_40.png" );
+    frisbee41 = load_image("ultimate_disc_white_41.png" );
+    frisbee42 = load_image("ultimate_disc_white_42.png" );
+    frisbee43 = load_image("ultimate_disc_white_43.png" );
+    frisbee44 = load_image("ultimate_disc_white_44.png" );
+    frisbee45 = load_image("ultimate_disc_white_45.png" );
     
     //Powerbar images
     p0 = load_image("0.bmp");
@@ -247,22 +296,21 @@ bool load_files( std::string backgroundFile )
     //Open the font
     font = TTF_OpenFont( "lazy.ttf", 42 );
     
-    if( background ==NULL || frisbee2 == NULL || font==NULL  )
+    if( background ==NULL || frisbee45 == NULL || font==NULL  )
     {
       std::cout<<"Files did not load correctly"<<std::endl;
       return false;
     }
     
-	//Load music
-	music = Mix_LoadMUS ( "Harder_than_you_think.wav");
+    //Load music
+    music = Mix_LoadMUS ( "Harder_than_you_think.wav");
 
-	//Possible problem loading music
-	if(music == NULL)
-	{
-		std::cout<<"Music did not load correctly"<<std::endl;
-		return false;
-
-	}
+    //Possible problem loading music
+    if(music == NULL)
+    {
+	std::cout<<"Music did not load correctly"<<std::endl;
+	return false;
+     }
 
     std::cout<<"Files loaded correctly"<<std::endl;
     return true;
@@ -291,6 +339,31 @@ void clean_up()
     SDL_FreeSurface (frisbee18);
     SDL_FreeSurface (frisbee19);
     SDL_FreeSurface (frisbee20);
+    SDL_FreeSurface (frisbee21);
+    SDL_FreeSurface (frisbee22);
+    SDL_FreeSurface (frisbee23);
+    SDL_FreeSurface (frisbee24);
+    SDL_FreeSurface (frisbee25);
+    SDL_FreeSurface (frisbee26);
+    SDL_FreeSurface (frisbee27);
+    SDL_FreeSurface (frisbee28);
+    SDL_FreeSurface (frisbee29);
+    SDL_FreeSurface (frisbee30);
+    SDL_FreeSurface (frisbee31);
+    SDL_FreeSurface (frisbee32);
+    SDL_FreeSurface (frisbee33);
+    SDL_FreeSurface (frisbee34);
+    SDL_FreeSurface (frisbee35);
+    SDL_FreeSurface (frisbee36);
+    SDL_FreeSurface (frisbee37);
+    SDL_FreeSurface (frisbee38);
+    SDL_FreeSurface (frisbee39);
+    SDL_FreeSurface (frisbee40);
+    SDL_FreeSurface (frisbee41);
+    SDL_FreeSurface (frisbee42);
+    SDL_FreeSurface (frisbee43);
+    SDL_FreeSurface (frisbee44);
+    SDL_FreeSurface (frisbee45);
     SDL_FreeSurface (arrow0);
     SDL_FreeSurface (left45);
     SDL_FreeSurface (left30);
@@ -322,17 +395,18 @@ void clean_up()
     SDL_FreeSurface (p14);
     SDL_FreeSurface (p15);
     
-	Mix_FreeMusic(music);
+    Mix_FreeMusic(music);
 
     TTF_CloseFont(font);
 
-	//Quit Mixer
-	Mix_CloseAudio();
+     //Quit Mixer
+     Mix_CloseAudio();
     
     TTF_Quit();
     
     std::cout<<"Quitting SDL..."<<std::endl;
     
+    //quit sdl
     SDL_Quit();
     
 }
@@ -347,7 +421,7 @@ void fly_away(int direction)
     
     int maxDistance = ( SCREEN_HEIGHT ) / 4;
     int distDifference =( SCREEN_HEIGHT - frisbee1->h  / 2 ) - maxDistance ; 
-    int increment = distDifference / 20;
+    int increment = distDifference / 45;
         
     
     //center the frisbee on the screen  
@@ -356,7 +430,7 @@ void fly_away(int direction)
     
     int i;
     
-    for( i=1; i<21 ; i++)
+    for( i=1; i<46 ; i++)
     {
         switch(i)
         {
@@ -420,6 +494,81 @@ void fly_away(int direction)
             case(20):
             	currentFrisbee = frisbee20;
             break;
+            case(21):
+            	currentFrisbee = frisbee21;
+            break;
+            case(22):
+            	currentFrisbee = frisbee22;
+            break;
+            case(23):
+            	currentFrisbee = frisbee23;
+            break;
+            case(24):
+            	currentFrisbee = frisbee24;
+            break;
+            case(25):
+            	currentFrisbee = frisbee25;
+            break;
+            case(26):
+            	currentFrisbee = frisbee26;
+            break;
+            case(27):
+            	currentFrisbee = frisbee27;
+            break;
+            case(28):
+            	currentFrisbee = frisbee28;
+            break;
+            case(29):
+            	currentFrisbee = frisbee29;
+            break;
+            case(30):
+            	currentFrisbee = frisbee30;
+            break;
+            case(31):
+            	currentFrisbee = frisbee31;
+            break;
+            case(32):
+            	currentFrisbee = frisbee32;
+            break;
+            case(33):
+            	currentFrisbee = frisbee33;
+            break;
+            case(34):
+            	currentFrisbee = frisbee34;
+            break;
+            case(35):
+            	currentFrisbee = frisbee35;
+            break;
+            case(36):
+            	currentFrisbee = frisbee36;
+            break;
+            case(37):
+            	currentFrisbee = frisbee37;
+            break;
+            case(38):
+            	currentFrisbee = frisbee38;
+            break;
+            case(39):
+            	currentFrisbee = frisbee39;
+            break;
+            case(40):
+            	currentFrisbee = frisbee40;
+            break;
+            case(41):
+            	currentFrisbee = frisbee41;
+            break;
+            case(42):
+            	currentFrisbee = frisbee42;
+            break;
+            case(43):
+            	currentFrisbee = frisbee43;
+            break;
+            case(44):
+            	currentFrisbee = frisbee44;
+            break;
+            case(45):
+            	currentFrisbee = frisbee45;
+            break;
             default:
             	currentFrisbee = NULL;
             break;
@@ -427,8 +576,7 @@ void fly_away(int direction)
         
         xposFrisbee= ( SCREEN_WIDTH - currentFrisbee->w ) / 2 ;
         yposFrisbee = yposFrisbee - increment;
-        
-        
+             
         apply_surface( 0, 0, background, screen);
         apply_surface( xposFrisbee, yposFrisbee, currentFrisbee, screen);
         
@@ -489,8 +637,8 @@ int play( std::string backgroundFile )
     int minPower =0;
      
      //set up the keystates        
-     Uint8* keystates = SDL_GetKeyState( NULL );
-            
+     Uint8* keystates = SDL_GetKeyState( NULL );     
+     
     //loop until the user quits       
     while( quit == false )
     {
@@ -509,6 +657,13 @@ int play( std::string backgroundFile )
          apply_surface( xposPowerbar, yposPowerbar, currentPowerbar, screen);
          apply_surface( xposArrow, yposArrow, currentArrow, screen);
          apply_surface( xposAngle, yposAngle, currentAngle, screen);
+         
+         //If there is no music playing
+         if( Mix_PlayingMusic() == 0 )
+         {
+             //Play the music
+             Mix_PlayMusic( music, -1 ); 
+         }
          
          //get the state of all of the keys
          SDL_PumpEvents();
@@ -602,7 +757,6 @@ int play( std::string backgroundFile )
              {
                 //update keystates
                 SDL_PumpEvents();
-                //SDL_PollEvent( &event );
                  
                  if( keystates[SDLK_RETURN] )
                  {
@@ -641,9 +795,7 @@ int play( std::string backgroundFile )
                                
                 message = TTF_RenderText_Solid( font, s.c_str(), textColor );*/
                                                 
-                //apply the background and frisbee
-               apply_surface( 0, 0, background, screen);
-               apply_surface( xposFris, yposFris, frisbee1, screen);
+                
                
                //determine current power
                switch(i)
@@ -717,6 +869,10 @@ int play( std::string backgroundFile )
                    	currentPowerbar = p0;
                    break;
                }
+               
+               //apply the background and frisbee
+               apply_surface( 0, 0, background, screen);
+               apply_surface( xposFris, yposFris, frisbee1, screen);
                
                //display power bar
                apply_surface ( xposPowerbar, yposPowerbar, currentPowerbar, screen);
