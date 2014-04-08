@@ -17,6 +17,7 @@ TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
+#include "SDL/SDL_mixer.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -84,6 +85,10 @@ SDL_Surface *screen = NULL;
 //Initialize font
 TTF_Font *font = NULL;
 SDL_Color textColor = { 255, 255, 255 };
+
+
+//Music that will be played
+Mix_Music *music = NULL;
 
 //Event structure
 SDL_Event event;
@@ -160,6 +165,13 @@ bool init()
       return false;
     }
     
+	//Initialize SDL_mixer
+	
+	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	{
+		return false;
+	}
+
     //set a window caption
     SDL_WM_SetCaption( "Hole 1", NULL );
     
@@ -240,6 +252,17 @@ bool load_files( std::string backgroundFile )
       return false;
     }
     
+	//Load music
+	music = Mix_LoadMUS ( "Harder_than_you_think.wav");
+
+	//Possible problem loading music
+	if(music == NULL)
+	{
+		std::cout<<"Music did not load correctly"<<std::endl;
+		return false;
+
+	}
+
     std::cout<<"Files loaded correctly"<<std::endl;
     return true;
 }
@@ -298,7 +321,12 @@ void clean_up()
     SDL_FreeSurface (p14);
     SDL_FreeSurface (p15);
     
+	Mix_FreeMusic(music);
+
     TTF_CloseFont(font);
+
+	//Quit Mixer
+	Mix_CloseAudio();
     
     TTF_Quit();
     
