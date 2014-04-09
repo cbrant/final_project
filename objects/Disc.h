@@ -13,11 +13,14 @@ class Disc {
 	public:
 		Disc();
 		
-		void letFly(double, double, int, int, int , int);
+		void letFly(double, double, int, int, int, int , int);
 		void print();
 		int checkHole(int, int);
+		
+		void calcXspot(int);
+		void calcYspot(int);
+		void distFromHole(int, int);
 	
-		//can we just use protected?
 		double getX();
 		double getY();
 		double getVx();
@@ -26,8 +29,9 @@ class Disc {
 	private:
 		double x; //xpos
 		double y; //ypos
+		double z; //zpos (height)
 		double vx; //xvel
-		double vy; //yvel
+		double vz; //zvel
 };
 
 #endif
