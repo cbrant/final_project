@@ -22,6 +22,9 @@ TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
+#include <cmath>
+
+#define _USE_MATH_DEFINES
 
 const int SCREEN_WIDTH = 771;
 const int SCREEN_HEIGHT = 593;
@@ -415,18 +418,47 @@ void fly_away(int direction)
 {
     //current frisbee image
     SDL_Surface* currentFrisbee = frisbee1;
+   
+    //horizontal angle for the fribee to be thrown  
+    double angle = 0;
     
     //horizontal angle
-    //switch(direction)
+    switch(direction)
+    {
+    	case -3:
+    	  angle = -45.0 * (M_PI / 180);
+    	break;
+    	case -2:
+    	  angle = -30.0 * (M_PI  / 180);
+    	break;
+    	case -1:
+    	  angle = -15.0 * (M_PI  / 180);
+    	break;
+    	case 0:
+    	  angle = 0.0 * (M_PI  / 180);
+    	break;
+    	case 1:
+    	  angle = 15.0 * (M_PI  / 180);
+    	break;
+    	case 2:
+    	  angle = 30.0 * (M_PI  / 180);
+    	break;
+    	case 3:
+    	  angle = 45.0 * (M_PI  / 180);
+    	break;
+    	default:
+    	  angle = 0.0 * (M_PI  / 180);
+    	break;
+    }
     
-    int maxDistance = ( SCREEN_HEIGHT ) / 4;
-    int distDifference =( SCREEN_HEIGHT - frisbee1->h  / 2 ) - maxDistance ; 
-    int increment = distDifference / 45;
+    double maxDistance = ( SCREEN_HEIGHT ) / 4;
+    double distDifference =( SCREEN_HEIGHT - frisbee1->h  / 2 ) - maxDistance ; 
+    double increment = distDifference / 45;
         
-    
-    //center the frisbee on the screen  
-    int xposFrisbee= ( SCREEN_WIDTH - frisbee1->w ) / 2 ;
-    int yposFrisbee= ( SCREEN_HEIGHT - frisbee1->h  / 2 ) ; 
+    //center the frisbee on the screen  and save original spot
+    double xposFrisbee= ( SCREEN_WIDTH - frisbee1->w ) / 2 ;
+    double yposFrisbee= ( SCREEN_HEIGHT - frisbee1->h  / 2 ) ; 
+    double yposFrisbeeOrig= ( SCREEN_HEIGHT - frisbee1->h  / 2 ) ; 
     
     int i;
     
@@ -574,8 +606,12 @@ void fly_away(int direction)
             break;
         }
         
-        xposFrisbee= ( SCREEN_WIDTH - currentFrisbee->w ) / 2 ;
+        double test =( (yposFrisbeeOrig - yposFrisbee)  * tan(angle) );
+        std::cout<<test<<std::endl;
+        
         yposFrisbee = yposFrisbee - increment;
+        xposFrisbee= (( SCREEN_WIDTH - currentFrisbee->w ) / 2) + ( (yposFrisbeeOrig - yposFrisbee)  * tan(angle) );
+        
              
         apply_surface( 0, 0, background, screen);
         apply_surface( xposFrisbee, yposFrisbee, currentFrisbee, screen);
@@ -767,8 +803,7 @@ int play( std::string backgroundFile )
                      	return 0;
                      	//PowerbarGoing = false;
                  }
-                   
-                 
+                                
                  //bounce power between max and min power 
                  if( i<maxPower && inc)
                    i++;
@@ -794,9 +829,7 @@ int play( std::string backgroundFile )
                  std::string s= ss.str();
                                
                 message = TTF_RenderText_Solid( font, s.c_str(), textColor );*/
-                                                
-                
-               
+
                //determine current power
                switch(i)
                {
@@ -902,7 +935,7 @@ int play( std::string backgroundFile )
      }
      
      //clean up the surfaces
-     clean_up();
+     //clean_up();
      
      return 0;
 }
