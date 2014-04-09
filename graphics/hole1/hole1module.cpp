@@ -215,89 +215,89 @@ bool load_files( std::string backgroundFile )
     background = load_image( backgroundFile );
     
     //Frisbee images
-    frisbee1 = load_image("ultimate_disc_white_1.png" );
-    frisbee2 = load_image("ultimate_disc_white_2.png" );
-    frisbee3 = load_image("ultimate_disc_white_3.png" );
-    frisbee4 = load_image("ultimate_disc_white_4.png" );
-    frisbee5 = load_image("ultimate_disc_white_5.png" );
-    frisbee6 = load_image("ultimate_disc_white_6.png" );
-    frisbee7 = load_image("ultimate_disc_white_7.png" );
-    frisbee8 = load_image("ultimate_disc_white_8.png" );
-    frisbee9 = load_image("ultimate_disc_white_9.png" );
-    frisbee10 = load_image("ultimate_disc_white_10.png" );
-    frisbee11 = load_image("ultimate_disc_white_11.png" );
-    frisbee12 = load_image("ultimate_disc_white_12.png" );
-    frisbee13 = load_image("ultimate_disc_white_13.png" );
-    frisbee14 = load_image("ultimate_disc_white_14.png" );
-    frisbee15 = load_image("ultimate_disc_white_15.png" );
-    frisbee16 = load_image("ultimate_disc_white_16.png" );
-    frisbee17 = load_image("ultimate_disc_white_17.png" );
-    frisbee18 = load_image("ultimate_disc_white_18.png" );
-    frisbee19 = load_image("ultimate_disc_white_19.png" );
-    frisbee20 = load_image("ultimate_disc_white_20.png" );
-    frisbee21 = load_image("ultimate_disc_white_21.png" );
-    frisbee22 = load_image("ultimate_disc_white_22.png" );
-    frisbee23 = load_image("ultimate_disc_white_23.png" );
-    frisbee24 = load_image("ultimate_disc_white_24.png" );
-    frisbee25 = load_image("ultimate_disc_white_25.png" );
-    frisbee26 = load_image("ultimate_disc_white_26.png" );
-    frisbee27 = load_image("ultimate_disc_white_27.png" );
-    frisbee28 = load_image("ultimate_disc_white_28.png" );
-    frisbee29 = load_image("ultimate_disc_white_29.png" );
-    frisbee30 = load_image("ultimate_disc_white_30.png" );
-    frisbee31 = load_image("ultimate_disc_white_31.png" );
-    frisbee32 = load_image("ultimate_disc_white_32.png" );
-    frisbee33 = load_image("ultimate_disc_white_33.png" );
-    frisbee34 = load_image("ultimate_disc_white_34.png" );
-    frisbee35 = load_image("ultimate_disc_white_35.png" );
-    frisbee36 = load_image("ultimate_disc_white_36.png" );
-    frisbee37 = load_image("ultimate_disc_white_37.png" );
-    frisbee38 = load_image("ultimate_disc_white_38.png" );
-    frisbee39 = load_image("ultimate_disc_white_39.png" );
-    frisbee40 = load_image("ultimate_disc_white_40.png" );
-    frisbee41 = load_image("ultimate_disc_white_41.png" );
-    frisbee42 = load_image("ultimate_disc_white_42.png" );
-    frisbee43 = load_image("ultimate_disc_white_43.png" );
-    frisbee44 = load_image("ultimate_disc_white_44.png" );
-    frisbee45 = load_image("ultimate_disc_white_45.png" );
+    frisbee1 = load_image("../../pictures/discs/white/ultimate_disc_white_1.png" );
+    frisbee2 = load_image("../../pictures/discs/white/ultimate_disc_white_2.png" );
+    frisbee3 = load_image("../../pictures/discs/white/ultimate_disc_white_3.png" );
+    frisbee4 = load_image("../../pictures/discs/white/ultimate_disc_white_4.png" );
+    frisbee5 = load_image("../../pictures/discs/white/ultimate_disc_white_5.png" );
+    frisbee6 = load_image("../../pictures/discs/white/ultimate_disc_white_6.png" );
+    frisbee7 = load_image("../../pictures/discs/white/ultimate_disc_white_7.png" );
+    frisbee8 = load_image("../../pictures/discs/white/ultimate_disc_white_8.png" );
+    frisbee9 = load_image("../../pictures/discs/white/ultimate_disc_white_9.png" );
+    frisbee10 = load_image("../../pictures/discs/white/ultimate_disc_white_10.png" );
+    frisbee11 = load_image("../../pictures/discs/white/ultimate_disc_white_11.png" );
+    frisbee12 = load_image("../../pictures/discs/white/ultimate_disc_white_12.png" );
+    frisbee13 = load_image("../../pictures/discs/white/ultimate_disc_white_13.png" );
+    frisbee14 = load_image("../../pictures/discs/white/ultimate_disc_white_14.png" );
+    frisbee15 = load_image("../../pictures/discs/white/ultimate_disc_white_15.png" );
+    frisbee16 = load_image("../../pictures/discs/white/ultimate_disc_white_16.png" );
+    frisbee17 = load_image("../../pictures/discs/white/ultimate_disc_white_17.png" );
+    frisbee18 = load_image("../../pictures/discs/white/ultimate_disc_white_18.png" );
+    frisbee19 = load_image("../../pictures/discs/white/ultimate_disc_white_19.png" );
+    frisbee20 = load_image("../../pictures/discs/white/ultimate_disc_white_20.png" );
+    frisbee21 = load_image("../../pictures/discs/white/ultimate_disc_white_21.png" );
+    frisbee22 = load_image("../../pictures/discs/white/ultimate_disc_white_22.png" );
+    frisbee23 = load_image("../../pictures/discs/white/ultimate_disc_white_23.png" );
+    frisbee24 = load_image("../../pictures/discs/white/ultimate_disc_white_24.png" );
+    frisbee25 = load_image("../../pictures/discs/white/ultimate_disc_white_25.png" );
+    frisbee26 = load_image("../../pictures/discs/white/ultimate_disc_white_26.png" );
+    frisbee27 = load_image("../../pictures/discs/white/ultimate_disc_white_27.png" );
+    frisbee28 = load_image("../../pictures/discs/white/ultimate_disc_white_28.png" );
+    frisbee29 = load_image("../../pictures/discs/white/ultimate_disc_white_29.png" );
+    frisbee30 = load_image("../../pictures/discs/white/ultimate_disc_white_30.png" );
+    frisbee31 = load_image("../../pictures/discs/white/ultimate_disc_white_31.png" );
+    frisbee32 = load_image("../../pictures/discs/white/ultimate_disc_white_32.png" );
+    frisbee33 = load_image("../../pictures/discs/white/ultimate_disc_white_33.png" );
+    frisbee34 = load_image("../../pictures/discs/white/ultimate_disc_white_34.png" );
+    frisbee35 = load_image("../../pictures/discs/white/ultimate_disc_white_35.png" );
+    frisbee36 = load_image("../../pictures/discs/white/ultimate_disc_white_36.png" );
+    frisbee37 = load_image("../../pictures/discs/white/ultimate_disc_white_37.png" );
+    frisbee38 = load_image("../../pictures/discs/white/ultimate_disc_white_38.png" );
+    frisbee39 = load_image("../../pictures/discs/white/ultimate_disc_white_39.png" );
+    frisbee40 = load_image("../../pictures/discs/white/ultimate_disc_white_40.png" );
+    frisbee41 = load_image("../../pictures/discs/white/ultimate_disc_white_41.png" );
+    frisbee42 = load_image("../../pictures/discs/white/ultimate_disc_white_42.png" );
+    frisbee43 = load_image("../../pictures/discs/white/ultimate_disc_white_43.png" );
+    frisbee44 = load_image("../../pictures/discs/white/ultimate_disc_white_44.png" );
+    frisbee45 = load_image("../../pictures/discs/white/ultimate_disc_white_45.png" );
     
     //Powerbar images
-    p0 = load_image("0.bmp");
-    p1 = load_image("1.bmp");
-    p2 = load_image("2.bmp");
-    p3 = load_image("3.bmp");
-    p4 = load_image("4.bmp");
-    p5 = load_image("5.bmp");
-    p6 = load_image("6.bmp");
-    p7 = load_image("7.bmp");
-    p8 = load_image("8.bmp");
-    p9 = load_image("9.bmp");
-    p10 = load_image("10.bmp");
-    p11 = load_image("11.bmp");
-    p12 = load_image("12.bmp");
-    p13 = load_image("13.bmp");
-    p14 = load_image("14.bmp");
-    p15 = load_image("15.bmp");
+    p0 = load_image("../../pictures/powerbars/0.bmp");
+    p1 = load_image("../../pictures/powerbars/1.bmp");
+    p2 = load_image("../../pictures/powerbars/2.bmp");
+    p3 = load_image("../../pictures/powerbars/3.bmp");
+    p4 = load_image("../../pictures/powerbars/4.bmp");
+    p5 = load_image("../../pictures/powerbars/5.bmp");
+    p6 = load_image("../../pictures/powerbars/6.bmp");
+    p7 = load_image("../../pictures/powerbars/7.bmp");
+    p8 = load_image("../../pictures/powerbars/8.bmp");
+    p9 = load_image("../../pictures/powerbars/9.bmp");
+    p10 = load_image("../../pictures/powerbars/10.bmp");
+    p11 = load_image("../../pictures/powerbars/11.bmp");
+    p12 = load_image("../../pictures/powerbars/12.bmp");
+    p13 = load_image("../../pictures/powerbars/13.bmp");
+    p14 = load_image("../../pictures/powerbars/14.bmp");
+    p15 = load_image("../../pictures/powerbars/15.bmp");
     
     //arrow images
-    arrow0 = load_image("0.png");
-    left15 = load_image("15_left.png");
-    left30 = load_image("30_left.png");
-    left45 = load_image("45_left.png");
-    right15 = load_image("15_right.png");
-    right30 = load_image("30_right.png");
-    right45 = load_image("45_right.png");
+    arrow0 = load_image("../../pictures/arrows/0.png");
+    left15 = load_image("../../pictures/arrows/15_left.png");
+    left30 = load_image("../../pictures/arrows/30_left.png");
+    left45 = load_image("../../pictures/arrows/45_left.png");
+    right15 = load_image("../../pictures/arrows/15_right.png");
+    right30 = load_image("../../pictures/arrows/30_right.png");
+    right45 = load_image("../../pictures/arrows/45_right.png");
     
     //angle images
-    angle0 = load_image("Angle_arrow0.bmp");
-    angle3 = load_image("Angle_arrow3.bmp");
-    angle6 = load_image("Angle_arrow6.bmp");
-    angle9 = load_image("Angle_arrow9.bmp");
-    angle12 = load_image("Angle_arrow12.bmp");
-    angle15 = load_image("Angle_arrow15.bmp");
+    angle0 = load_image("../../pictures/angle_arrows/Angle_arrow0.bmp");
+    angle3 = load_image("../../pictures/angle_arrows/Angle_arrow3.bmp");
+    angle6 = load_image("../../pictures/angle_arrows/Angle_arrow6.bmp");
+    angle9 = load_image("../../pictures/angle_arrows/Angle_arrow9.bmp");
+    angle12 = load_image("../../pictures/angle_arrows/Angle_arrow12.bmp");
+    angle15 = load_image("../../pictures/angle_arrows/Angle_arrow15.bmp");
     
     //Open the font
-    font = TTF_OpenFont( "lazy.ttf", 42 );
+    font = TTF_OpenFont( "../../fonts/lazy.ttf", 42 );
     
     if( background ==NULL || frisbee45 == NULL || font==NULL  )
     {
@@ -306,7 +306,7 @@ bool load_files( std::string backgroundFile )
     }
     
     //Load music
-    music = Mix_LoadMUS ( "Harder_than_you_think.wav");
+    music = Mix_LoadMUS ( "../../music/Harder_than_you_think.wav");
 
     //Possible problem loading music
     if(music == NULL)
@@ -945,11 +945,11 @@ int play( std::string backgroundFile )
 int main( int argv, char* argc[])
 {
     int left;
-    left = play("Start.png");
+    left = play("../../pictures/Hole1/Start.png");
     if(left)
-    	play("Hole1Left.png");
+    	play("../../pictures/Hole1/Hole1Left.png");
     else
-    	play("Hole1Right.png");
+    	play("../../pictures/Hole1/Hole1Right.png");
     
     clean_up();
     

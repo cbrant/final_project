@@ -1,7 +1,7 @@
-all: hole1
+all: hole1module
 
-hole1: hole1.cpp
-	g++ -g hole1.cpp -o hole1 -lSDL -lSDL_image -lSDL_ttf
+hole1module: hole1module.cpp
+	g++ -g hole1module.cpp -o hole1module -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
 	
 clean:
-	rm *.o *~ hole1
+	rm *.o *~ hole1module
