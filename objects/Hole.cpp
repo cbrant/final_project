@@ -10,9 +10,15 @@ interface of Hole object
 
 using namespace std;
 
-Hole::Hole(int X, int Y) {
+Hole::Hole(int X, int Y, int *arr) {
 	x = X;
 	y = Y;
+	
+	int i;
+	for(i = 0; i < 5; i++) {
+		thresholds[i] = arr[i];
+	}
+	
 	isHit = 0; //initially unhit
 }
 
@@ -25,6 +31,13 @@ void Hole::print() {
 	} else {
 		cout << " DEAD AHEAD." << endl;
 	}
+	
+	/*cout << "Threshold vals are : \n";
+	for(int i = 0; i < 5; i++) {
+		cout << thresholds[i] << " ";
+	}
+	
+	cout << endl << endl;*/
 }
 
 int Hole::getX() {
@@ -33,4 +46,8 @@ int Hole::getX() {
 
 int Hole::getY() {
 	return y;
+}
+
+int* Hole::getThresh() {
+	return thresholds;
 }

@@ -8,16 +8,22 @@ interface of Disc object
 #ifndef DISC_H
 #define DISC_H
 
+#include "Hole.h"
+
+
 class Disc {
 
 	public:
 		Disc();
 		
-		void letFly(double, double, int, int, int, int , int);
+		void letFly(double, double, int, int, int, Hole);
 		void print();
 		int checkHole(int, int);
-	
+		
+		void calcXspot(int, double);
+		void calcYspot(int, double);
 		void distFromHole(int, int);
+		int* pickScreen(int*);
 	
 		double getX();
 		double getY();
