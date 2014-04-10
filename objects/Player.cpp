@@ -16,14 +16,16 @@ Player::Player (string n, int pow, int acc) {
 	accuracy = acc;
 }
 
-void Player::toss(int x, int y) {
-	disc.letFly(10, 12.5, power, accuracy, x, y);
-	disc.print();
-	return;
+int Player::getPower() {
+	return power;
+}
+
+int Player::getAccuracy() {
+	return accuracy;
 }
 
 void Player::print() {
-	cout << "Player name: " << name << endl << "Power: " << power << " Accuracy: " << accuracy << endl;
+	cout << "Printing player." << endl << "Player name: " << name << endl << "Power: " << power << " Accuracy: " << accuracy << endl;
 	return;
 }
 

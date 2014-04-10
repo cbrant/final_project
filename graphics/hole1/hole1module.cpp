@@ -26,8 +26,8 @@ TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 
 #define _USE_MATH_DEFINES
 
-const int SCREEN_WIDTH = 771;
-const int SCREEN_HEIGHT = 593;
+const int SCREEN_WIDTH = 750;
+const int SCREEN_HEIGHT = 590;
 const int SCREEN_BPP = 32;
 const int FRAMES_PER_SECOND = 60;
 
@@ -913,7 +913,7 @@ int play( std::string backgroundFile )
                 //Update the screen
                 if( SDL_Flip( screen ) == -1 )
                 {
-                   std::cout<<"Error in updating sceen"<<std::endl;
+                   std::cout<<"Error in updating screen"<<std::endl;
                    return 1;
                 }
                  
@@ -924,7 +924,7 @@ int play( std::string backgroundFile )
          //Update the screen
         if( SDL_Flip( screen ) == -1 )
         {
-            std::cout<<"Error in updating sceen"<<std::endl;
+            std::cout<<"Error in updating screen"<<std::endl;
             return 1;
         }
          

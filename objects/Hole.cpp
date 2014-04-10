@@ -10,16 +10,21 @@ interface of Hole object
 
 using namespace std;
 
-Hole::Hole(int X, int Y, int H) {
+Hole::Hole(int X, int Y) {
 	x = X;
 	y = Y;
-	h = H;
 	isHit = 0; //initially unhit
 }
 
 void Hole::print() {
-	cout << "The hole is located " << x << " meters forward and " << y << " meters to the left/right" << endl;
-	cout << "You are aiming for a hole that is " << h << " meters off of the ground" << endl;
+	cout << "Printing hole." << endl << "The hole is located " << x << " meters forward ";
+	if(y < 0) {
+		cout << "and " << y << " meters to the left." << endl;
+	} else if(y > 0) {
+		cout << "and " << y << " meters to the right." << endl;
+	} else {
+		cout << " DEAD AHEAD." << endl;
+	}
 }
 
 int Hole::getX() {
