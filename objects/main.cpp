@@ -15,23 +15,24 @@ using namespace std;
 
 int main(void) {
 	Player player = Player("Jimmy Mickle", 4, 4);
-	Hole hole = Hole(150, 50);
+	
+	int hole1[4] = {50, 100, -50, 50};
+	
+	Hole hole = Hole(150, -50, hole1);
 	Disc disc;
 	
+//	cout << "\n\n";
+//	player.print();
 	cout << "\n\n";
-	player.print();
-	cout << "\n\n";
-	hole.print();
-	cout << "\n\n";
-	disc.print();
-	cout << "\n\n";
-	disc.letFly(15, 12.5, 19, player.getPower(), player.getAccuracy(), hole.getX(), hole.getY());
+//	hole.print();
+//	cout << "\n\n";
+//	disc.print();
+//	cout << "\n\n";
+	disc.letFly(30, 12.5, -19, player.getPower(), player.getAccuracy(), hole);
 		disc.print();
-	disc.letFly(10, 12.5, 19, player.getPower(), player.getAccuracy(), hole.getX(), hole.getY());
-		disc.print();
-	disc.letFly(5, 12.5, 19, player.getPower(), player.getAccuracy(), hole.getX(), hole.getY());
+	
 	cout << "\n\n";
-	disc.print();
-	cout << "\n\n";
+
+//	cout << "\n\n";
 	disc.distFromHole(hole.getX(), hole.getY());
 }

@@ -20,7 +20,7 @@ Disc::Disc() {
 	vz = 0;
 }
 
-void Disc::letFly(double power, double uAlpha, int throwAngle,  int playerPower, int playerAccuracy, int xHole, int yHole) {
+void Disc::letFly(double power, double uAlpha, int throwAngle,  int playerPower, int playerAccuracy, Hole hole) {
 	
 	//get random seed
 	srand(time(NULL));
@@ -32,8 +32,9 @@ void Disc::letFly(double power, double uAlpha, int throwAngle,  int playerPower,
 	double alpha = uAlpha + random;//angle of attack, specified by user, modified by player accuracy
 
 	//cout << "Alpha with the randFactor is " << alpha << endl;
-
-	x = 0; //x position (m)
+	
+	double dist = 0;
+	//x = 0; //x position (m)
 	z = 1; //y position (m)
 	vx = cos(uAlpha*M_PI/180)*adjPower; //x velocity (m/s)
 	vz = sin(uAlpha*M_PI/180)*adjPower; //y velocity (m/s)
@@ -66,34 +67,55 @@ void Disc::letFly(double power, double uAlpha, int throwAngle,  int playerPower,
 		vx = vx + deltavx;
 		vz = vz + deltavz;
 		
-		x = x + vx*dt;
+		dist = dist + vx*dt;
 		z = z + vz*dt;
 		
 		count = count + 1;
 		
-		if(checkHole(xHole, yHole)) {
-			cout << "Hit the hole" << endl;
+		calcYspot(throwAngle, vx*dt);
+		calcXspot(throwAngle, vx*dt);
+		
+		if(checkHole(hole.getX(), hole.getY())) {
+			cout << "\n\nHit the hole!!!\n\n" << endl;
 			break;
 		}
 	}
 
 	//cout << "Time was " << count*dt << " seconds." << endl;
-	cout << "letFly(): The disc traveled " << x << " meters." << endl;
+	cout << "letFly(): The disc traveled " << dist << " meters." << endl;
 	
-	calcYspot(throwAngle);
-	calcXspot(throwAngle);
+
+	pickScreen(hole.getThresh());
 	
 	return;
 }
 
-void Disc::calcXspot(int angle) {
-	x = x*cos(angle*M_PI/180);
+void Disc::calcXspot(int angle, double dist) {
+	x = x + dist*cos(angle*M_PI/180);
 	return;
 }
 
-void Disc::calcYspot(int angle) {
-	y = x*sin(angle*M_PI/180);
+void Disc::calcYspot(int angle, double dist) {
+	y = y + dist*sin(angle*M_PI/180);
 	return;
+}
+
+int Disc::pickScreen(int* thresholds) {
+	int* arr = thresholds;
+	
+	if(x < arr[0]) {
+		return 0;
+	} else if (x > arr[1]) {
+		return 4;
+	} else {
+		if(y < arr[2]) {
+			return 1;
+		} else if(y > arr[3]) {
+			return 3;
+		} else {
+			return 2;
+		}
+	}
 }
 
 double Disc::getX() {
