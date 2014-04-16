@@ -16,7 +16,7 @@ using namespace std;
 class Player {
 
 	public:
-		Player(string, int, int);
+		Player(string, int, int, string);
 		void print();
 		int getPower();
 		int getAccuracy();
@@ -25,6 +25,7 @@ class Player {
 		int power;
 		int accuracy;
 		string name;
+		string song;
 		
 		Disc disc;
 

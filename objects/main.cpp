@@ -14,7 +14,7 @@ purp: for testing the objectes
 using namespace std;
 
 int main(void) {
-	Player player = Player("Jimmy Mickle", 4, 4);
+	Player player = Player("Jimmy Mickle", 4, 4, "../music/Harder_than_you_think.wav");
 	
 	int hole1[4] = {50, 100, -50, 50};
 	
