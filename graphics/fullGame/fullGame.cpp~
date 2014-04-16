@@ -670,10 +670,7 @@ double* play( std::string backgroundFile, std::string musicFile )
     double angle = 0;
     
     //alpha variable (vertical)
-    double alpha = 0;
-    
-    //stats[1] = alpha;
-    //stats[2] = angle; 
+    double alpha = 0; 
     
     //max and min for power 
     int maxPower = 15;
