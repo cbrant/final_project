@@ -23,9 +23,9 @@ TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
-#include "../../objects/Hole.h"
-#include "../../objects/Disc.h"
-#include "../../objects/Player.h"
+#include "Hole.h"
+#include "Disc.h"
+#include "Player.h"
 
 #define _USE_MATH_DEFINES
 
@@ -307,7 +307,7 @@ bool load_files( std::string backgroundFile, std::string musicFile )
     }
     
     //Load music
-    music = Mix_LoadMUS ( musicFile);
+    music = Mix_LoadMUS ( musicFile.c_str());
 
     //Possible problem loading music
     if(music == NULL)
@@ -614,6 +614,8 @@ void fly_away(int direction)
         apply_surface( 0, 0, background, screen);
         apply_surface( xposFrisbee, yposFrisbee, currentFrisbee, screen);
         
+        usleep(1000);
+        
         //Update the screen
         if( SDL_Flip( screen ) == -1 )
         {
@@ -689,6 +691,8 @@ double* play( std::string backgroundFile, std::string musicFile )
              if( event.type == SDL_QUIT )
              {
                  quit = true;
+                 clean_up();
+                 exit(1);
              }
          }
             
@@ -966,9 +970,41 @@ double* play( std::string backgroundFile, std::string musicFile )
 int main( int argv, char* argc[])
 {
     double* stuff;
-    Player* jimmy = new Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");
-    stuff = play("../../pictures/Hole1/Start.png");
-    std::cout<<stuff[0]<<stuff[1]<<stuff[2]<<std::endl;
+    Player jimmy = Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");
+    Disc disc;
+    int hole1[] = {25,75,-10,10};
+    Hole hole = Hole(100, -5, hole1);
+    std::string currentPic;
+    
+    
+    while( !disc.checkHole(hole.getX(), hole.getY()) )
+    {
+    	switch(disc.pickScreen(hole1))
+    	{
+    	    case 0:
+    	      currentPic = "../../pictures/Hole1/Start.png";
+    	    break;
+    	    case 1:
+    	      currentPic = "../../pictures/Hole1/Hole1Left.png";
+    	    break;
+    	    case 2:
+    	      currentPic = "../../pictures/Hole1/Hole1Middle.png";
+    	    break;
+    	    case 3:
+    	      currentPic = "../../pictures/Hole1/Hole1Right.png";
+    	    break;
+    	    case 4:
+    	      currentPic = "../../pictures/Hole1/Hole1End.png";
+    	    break;
+    	    default:
+    	      currentPic = "../../pictures/Hole1/Start.png";
+    	    break;
+    	}
+    	
+        stuff = play(currentPic, jimmy.getSong());
+        disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(),hole);
+        disc.distFromHole(hole.getX(), hole.getY() );
+    }
     
     clean_up();
     
