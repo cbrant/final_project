@@ -14,6 +14,15 @@ Player::Player (string n, int pow, int acc) {
 	name = n;
 	power = pow;
 	accuracy = acc;
+	song = "../music/Harder_than_you_think.wav";
+}
+
+int Player::getPower() {
+	return power;
+}
+
+int Player::getAccuracy() {
+	return accuracy;
 }
 
 void Player::print() {

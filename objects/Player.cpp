@@ -10,10 +10,11 @@ implementation of Player object
 
 using namespace std;
 
-Player::Player (string n, int pow, int acc) {
+Player::Player (string n, int pow, int acc, string son) {
 	name = n;
 	power = pow;
 	accuracy = acc;
+	song = son;
 }
 
 int Player::getPower() {
