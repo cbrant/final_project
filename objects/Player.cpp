@@ -30,3 +30,6 @@ void Player::print() {
 	return;
 }
 
+string Player::getSong() {
+	return song;
+}

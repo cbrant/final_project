@@ -20,6 +20,7 @@ class Player {
 		void print();
 		int getPower();
 		int getAccuracy();
+		string getSong();
 		
 	private:
 		int power;
