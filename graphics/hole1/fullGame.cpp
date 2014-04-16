@@ -29,8 +29,6 @@ TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 const int SCREEN_WIDTH = 750;
 const int SCREEN_HEIGHT = 590;
 const int SCREEN_BPP = 32;
-const int FRAMES_PER_SECOND = 60;
-
 
 //Surfaces
 SDL_Surface *background = NULL;
@@ -622,18 +620,16 @@ void fly_away(int direction)
     }
 }
 
-int play( std::string backgroundFile )
+double* play( std::string backgroundFile )
 {
     //quit program flag
     bool quit = false;
    
     //initilize everything
-    if( init() == false )
-      return 1;
+    init();
         
     //load in our files
-    if( load_files( backgroundFile ) == false )
-      return 1;
+    load_files( backgroundFile );
       
      //current powerbar image
     SDL_Surface* currentPowerbar = p0;
@@ -663,7 +659,16 @@ int play( std::string backgroundFile )
     int yposAngle= ( SCREEN_WIDTH - angle0->h) / 2;
     
     //power variable
-    int power = 0;
+    double power = 0;
+    
+    //angle variable (horizontal)
+    double angle = 0;
+    
+    //alpha variable (vertical)
+    double alpha = 0;
+    
+    //stats[1] = alpha;
+    //stats[2] = angle; 
     
     //max and min for power 
     int maxPower = 15;
@@ -701,6 +706,7 @@ int play( std::string backgroundFile )
          //get the state of all of the keys
          SDL_PumpEvents();
          
+         //monitor user keystrokes
          if( keystates[SDLK_LEFT])
          {
              if(arrowCount>-3)
@@ -725,56 +731,74 @@ int play( std::string backgroundFile )
              	angleCount--;
          }
          
+         //check current horizontal angle
          switch( arrowCount )
          {
              case -3:
                  currentArrow = left45;
+                 angle = -45;
              break;
              case -2:
                  currentArrow = left30;
+                 angle = -30;
              break;
              case -1:
                  currentArrow = left15;
+                 angle = -15;
              break;
              case 0:
                  currentArrow = arrow0;
+                 angle = 0;
              break;
              case 1:
                  currentArrow = right15;
+                 angle = 15;
              break;
              case 2:
                  currentArrow = right30;
+                 angle = 30;
              break;
              case 3:
                  currentArrow = right45;
+                 angle = 45;
              break;
              default:
                  currentArrow = arrow0;
+                 angle = 0;
              break;
          }   
          
+         //check current vertical angle
          switch( angleCount )
          {
              case 0:
-             	currentAngle = angle0;    
+             	currentAngle = angle0;
+             	alpha = 0;    
              break;
              case 1:
-             	currentAngle = angle3;    
+             	currentAngle = angle3;   
+             	alpha = 3;
              break;
              case 2:
-             	currentAngle = angle6;    
+             	currentAngle = angle6;   
+             	alpha = 6; 
              break;
              case 3:
-             	currentAngle = angle9;    
+             	currentAngle = angle9;
+             	alpha = 9;    
              break;
              case 4:
-             	currentAngle = angle12;    
+             	currentAngle = angle12;
+             	alpha = 12;    
              break;
              case 5:
-             	currentAngle = angle15;    
+             	currentAngle = angle15;   
+             	alpha = 15; 
              break;
              default:
              	currentAngle = angle0;
+             	alpha = 0;
+            break;
          }
          
          if( keystates[SDLK_SPACE] )
@@ -794,11 +818,9 @@ int play( std::string backgroundFile )
                  if( keystates[SDLK_RETURN] )
                  {
                      fly_away(arrowCount);
-                     if(arrowCount<0)
-                       return 1;
-                     else
-                     	return 0;
-                     	//PowerbarGoing = false;
+                     double stats[] = {power,alpha,angle}; 
+                     return stats;
+                     //PowerbarGoing = false;
                  }
                                 
                  //bounce power between max and min power 
@@ -914,7 +936,6 @@ int play( std::string backgroundFile )
                 if( SDL_Flip( screen ) == -1 )
                 {
                    std::cout<<"Error in updating screen"<<std::endl;
-                   return 1;
                 }
                  
                  usleep(10000);
@@ -925,7 +946,6 @@ int play( std::string backgroundFile )
         if( SDL_Flip( screen ) == -1 )
         {
             std::cout<<"Error in updating screen"<<std::endl;
-            return 1;
         }
          
         usleep(50000); 
@@ -934,19 +954,17 @@ int play( std::string backgroundFile )
      //clean up the surfaces
      //clean_up();
      
-     return 0;
+     double stats[] = {power,alpha,angle}; 
+     return stats;
 }
 
 
 
 int main( int argv, char* argc[])
 {
-    int left;
-    left = play("../../pictures/Hole1/Start.png");
-    if(left)
-    	play("../../pictures/Hole1/Hole1Left.png");
-    else
-    	play("../../pictures/Hole1/Hole1Right.png");
+    double* stuff;
+    stuff = play("../../pictures/Hole1/Start.png");
+    std::cout<<stuff[0]<<stuff[1]<<stuff[2]<<std::endl;
     
     clean_up();
     
