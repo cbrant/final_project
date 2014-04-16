@@ -23,6 +23,9 @@ TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
+#include "../../objects/Hole.h"
+#include "../../objects/Disc.h"
+#include "../../objects/Player.h"
 
 #define _USE_MATH_DEFINES
 
@@ -205,7 +208,7 @@ bool init()
     return true;
 }
 
-bool load_files( std::string backgroundFile )
+bool load_files( std::string backgroundFile, std::string musicFile )
 {
     std::cout<<"Loading files..."<<std::endl;
     
@@ -304,7 +307,7 @@ bool load_files( std::string backgroundFile )
     }
     
     //Load music
-    music = Mix_LoadMUS ( "../../music/Harder_than_you_think.wav");
+    music = Mix_LoadMUS ( musicFile);
 
     //Possible problem loading music
     if(music == NULL)
@@ -620,7 +623,7 @@ void fly_away(int direction)
     }
 }
 
-double* play( std::string backgroundFile )
+double* play( std::string backgroundFile, std::string musicFile )
 {
     //quit program flag
     bool quit = false;
@@ -629,7 +632,7 @@ double* play( std::string backgroundFile )
     init();
         
     //load in our files
-    load_files( backgroundFile );
+    load_files( backgroundFile, musicFile );
       
      //current powerbar image
     SDL_Surface* currentPowerbar = p0;
@@ -963,6 +966,7 @@ double* play( std::string backgroundFile )
 int main( int argv, char* argc[])
 {
     double* stuff;
+    Player* jimmy = new Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");
     stuff = play("../../pictures/Hole1/Start.png");
     std::cout<<stuff[0]<<stuff[1]<<stuff[2]<<std::endl;
     
