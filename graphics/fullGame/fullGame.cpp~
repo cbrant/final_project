@@ -108,11 +108,14 @@ SDL_Surface *p14 = NULL;
 SDL_Surface *p15 = NULL;
 SDL_Surface *horzText = NULL;
 SDL_Surface *vertText = NULL;
+SDL_Surface *hitText = NULL;
 SDL_Surface *screen = NULL;
 
 //Initialize font
 TTF_Font *font = NULL;
-SDL_Color textColor = { 255, 0, 0 };
+TTF_Font *font2 = NULL;
+SDL_Color textColor = { 0, 0, 0 };
+SDL_Color textColor2 = { 240, 100, 0 };
 
 //Music that will be played
 Mix_Music *music = NULL;
@@ -296,7 +299,8 @@ bool load_files( std::string backgroundFile, std::string musicFile )
     angle15 = load_image("../../pictures/angle_arrows/Angle_arrow15.bmp");
     
     //Open the font
-    font = TTF_OpenFont( "../../fonts/lazy.ttf", 20 );
+    font = TTF_OpenFont( "../../fonts/BEBAS.ttf", 24 );
+    font2 = TTF_OpenFont( "../../fonts/BEBAS.ttf", 80 );
     
     if( background ==NULL || frisbee45 == NULL || font==NULL  )
     {
@@ -398,10 +402,12 @@ void clean_up()
     SDL_FreeSurface (p15);
     SDL_FreeSurface (horzText);
     SDL_FreeSurface (vertText);
+    SDL_FreeSurface (hitText);
     
     Mix_FreeMusic(music);
 
     TTF_CloseFont(font);
+    TTF_CloseFont(font2);
 
      //Quit Mixer
      Mix_CloseAudio();
@@ -704,6 +710,18 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
      //set up the keystates        
      Uint8* keystates = SDL_GetKeyState( NULL );     
      
+    if(horzDist == 0 && vertDist == 0)
+    {
+         hitText = TTF_RenderText_Solid( font2, "NICE SHOT!", textColor2);
+         apply_surface( 0, 0, background, screen);
+         apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
+         SDL_Flip( screen );
+         usleep(500000);
+         clean_up();
+         exit(0);
+     }
+     
+     
     //loop until the user quits       
     while( quit == false )
     {
@@ -725,7 +743,7 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( xposArrow, yposArrow, currentArrow, screen);
          apply_surface( xposAngle, yposAngle, currentAngle, screen);
          apply_surface( xposDistance, yposDistance, horzText, screen);
-         apply_surface( xposDistance, yposDistance +25 , vertText, screen);
+         apply_surface( xposDistance, yposDistance +35 , vertText, screen);
          
          //If there is no music playing
          if( Mix_PlayingMusic() == 0 )
@@ -1029,9 +1047,9 @@ int main( int argv, char* argc[])
         stuff = play(currentPic, jimmy.getSong(), hole.getY() - disc.getY(), hole.getX() - disc.getX());
         disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(),hole);
         disc.distFromHole(hole.getX(), hole.getY() );
-    }
+    } 
     
-    
+    play(currentPic,jimmy.getSong(), 0,0);
     
     clean_up();
     
