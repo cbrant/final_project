@@ -3,12 +3,8 @@ CSE20212
 Final Project
 hole1module.cpp
 
-Main program used to create hole1 of the course. Functionality is
-hardcoded now but will draw from object classes as development 
-continues. Currently user should be able to aim disc and start/stop
-power bar. Used lazyfoo.net tutorials as a guide.
-
-TRYING TO TURN THIS ALL INTO FUNCTIONS TO BE REUSED BY OTHER HOLES!
+Main program used to create the course. Functionality
+draws from object classes. Used lazyfoo.net tutorials as a guide.
 
 */
 
@@ -110,11 +106,13 @@ SDL_Surface *p12 = NULL;
 SDL_Surface *p13 = NULL;
 SDL_Surface *p14 = NULL;
 SDL_Surface *p15 = NULL;
+SDL_Surface *horzText = NULL;
+SDL_Surface *vertText = NULL;
 SDL_Surface *screen = NULL;
 
 //Initialize font
 TTF_Font *font = NULL;
-SDL_Color textColor = { 255, 255, 255 };
+SDL_Color textColor = { 255, 0, 0 };
 
 //Music that will be played
 Mix_Music *music = NULL;
@@ -298,7 +296,7 @@ bool load_files( std::string backgroundFile, std::string musicFile )
     angle15 = load_image("../../pictures/angle_arrows/Angle_arrow15.bmp");
     
     //Open the font
-    font = TTF_OpenFont( "../../fonts/lazy.ttf", 42 );
+    font = TTF_OpenFont( "../../fonts/lazy.ttf", 20 );
     
     if( background ==NULL || frisbee45 == NULL || font==NULL  )
     {
@@ -398,6 +396,8 @@ void clean_up()
     SDL_FreeSurface (p13);
     SDL_FreeSurface (p14);
     SDL_FreeSurface (p15);
+    SDL_FreeSurface (horzText);
+    SDL_FreeSurface (vertText);
     
     Mix_FreeMusic(music);
 
@@ -625,7 +625,7 @@ void fly_away(int direction)
     }
 }
 
-double* play( std::string backgroundFile, std::string musicFile )
+double* play( std::string backgroundFile, std::string musicFile, double horzDist, double vertDist )
 {
     //quit program flag
     bool quit = false;
@@ -675,6 +675,31 @@ double* play( std::string backgroundFile, std::string musicFile )
     //max and min for power 
     int maxPower = 15;
     int minPower =0;
+    
+    //textual representation of the distance to hole
+    std::stringstream ss1,ss2;
+    ss1.str(""); // empty the stringstream
+    ss1.clear();
+    ss2.str(""); // empty the stringstream
+    ss2.clear();
+    ss1 << abs(horzDist);
+    ss2 << vertDist;
+    std::string s1= ss1.str();
+    std::string s2= ss2.str();
+    std::string s3;
+    if(horzDist < 0)
+      s3= s1+ "m <--- ";
+    else
+      s3= s1+ "m --->";
+      
+    std::string s4= "Distance to hole: "+s2 + "m";
+               
+    horzText = TTF_RenderText_Solid( font, s3.c_str(), textColor );
+    vertText = TTF_RenderText_Solid( font, s4.c_str(), textColor );
+    
+    //place distance counters
+    int xposDistance = xposPowerbar;
+    int yposDistance = yposPowerbar + currentPowerbar->h + 25;
      
      //set up the keystates        
      Uint8* keystates = SDL_GetKeyState( NULL );     
@@ -693,12 +718,14 @@ double* play( std::string backgroundFile, std::string musicFile )
              }
          }
             
-         //apply the background and frisbee and current powerbar and arrow and angle
+         //apply the background and frisbee and current powerbar and arrow and angle and distances
          apply_surface( 0, 0, background, screen);
          apply_surface( xposFris, yposFris, frisbee1, screen);
          apply_surface( xposPowerbar, yposPowerbar, currentPowerbar, screen);
          apply_surface( xposArrow, yposArrow, currentArrow, screen);
          apply_surface( xposAngle, yposAngle, currentAngle, screen);
+         apply_surface( xposDistance, yposDistance, horzText, screen);
+         apply_surface( xposDistance, yposDistance +25 , vertText, screen);
          
          //If there is no music playing
          if( Mix_PlayingMusic() == 0 )
@@ -842,6 +869,7 @@ double* play( std::string backgroundFile, std::string musicFile )
                      inc = true;
                  }
                  
+                 
                   //Code for the numerical display of power
                  /*std::cout<<i<<std::endl;
                  
@@ -931,8 +959,8 @@ double* play( std::string backgroundFile, std::string musicFile )
                apply_surface( xposFris, yposFris, frisbee1, screen);
                
                //display power bar
-               apply_surface ( xposPowerbar, yposPowerbar, currentPowerbar, screen);
-                   	
+               apply_surface ( xposPowerbar, yposPowerbar, currentPowerbar, screen);              
+               
                //numerical power
                //apply_surface( 3 * SCREEN_WIDTH / 4, 3 * SCREEN_HEIGHT / 4, message, screen);
                
@@ -998,10 +1026,12 @@ int main( int argv, char* argc[])
     	    break;
     	}
     	
-        stuff = play(currentPic, jimmy.getSong());
+        stuff = play(currentPic, jimmy.getSong(), hole.getY() - disc.getY(), hole.getX() - disc.getX());
         disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(),hole);
         disc.distFromHole(hole.getX(), hole.getY() );
     }
+    
+    
     
     clean_up();
     
