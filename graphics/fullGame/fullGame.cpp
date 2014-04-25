@@ -8,7 +8,6 @@ draws from object classes. Used lazyfoo.net tutorials as a guide.
 
 */
 
-
 //Libraries to be included
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
@@ -708,8 +707,9 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
     int yposDistance = yposPowerbar + currentPowerbar->h + 25;
      
      //set up the keystates        
-     Uint8* keystates = SDL_GetKeyState( NULL );     
+     Uint8* keystates = SDL_GetKeyState( NULL );          
      
+     // hit screen 
     if(horzDist == 0 && vertDist == 0)
     {
          hitText = TTF_RenderText_Solid( font2, "NICE SHOT!", textColor2);
@@ -717,8 +717,8 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
          SDL_Flip( screen );
          usleep(500000);
-         clean_up();
-         exit(0);
+         double stats[] = {power,alpha,angle}; 
+          return stats;
      }
      
      
@@ -886,8 +886,7 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
                  {
                      inc = true;
                  }
-                 
-                 
+                         
                   //Code for the numerical display of power
                  /*std::cout<<i<<std::endl;
                  
@@ -1009,47 +1008,77 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
 }
 
 
-
-int main( int argv, char* argc[])
+void playHole( std::string holeName, Hole currentHole )
 {
+    
     double* stuff;
-    Player jimmy = Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");
+     
+    Player jimmy = Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");   
     Disc disc;
-    int hole1[] = {25,75,-10,10};
-    Hole hole = Hole(100, -5, hole1);
+    
     std::string currentPic;
     
-    
-    while( !disc.checkHole(hole.getX(), hole.getY()) )
+     while( !disc.checkHole(currentHole.getX(), currentHole.getY()) )
     {
-    	switch(disc.pickScreen(hole1))
+    	switch(disc.pickScreen(currentHole.getThresh()))
     	{
     	    case 0:
-    	      currentPic = "../../pictures/Hole1/Start.png";
+    	      currentPic = "../../pictures/"+holeName+"/Start.png";
     	    break;
     	    case 1:
-    	      currentPic = "../../pictures/Hole1/Hole1Left.png";
+    	      currentPic = "../../pictures/"+holeName+"/Left.png";
     	    break;
     	    case 2:
-    	      currentPic = "../../pictures/Hole1/Hole1Middle.png";
+    	      currentPic = "../../pictures/"+holeName+"/Middle.png";
     	    break;
     	    case 3:
-    	      currentPic = "../../pictures/Hole1/Hole1Right.png";
+    	      currentPic = "../../pictures/"+holeName+"/Right.png";
     	    break;
     	    case 4:
-    	      currentPic = "../../pictures/Hole1/Hole1End.png";
+    	      currentPic = "../../pictures/"+holeName+"/End.png";
     	    break;
     	    default:
-    	      currentPic = "../../pictures/Hole1/Start.png";
+    	      currentPic = "../../pictures/"+holeName+"/Start.png";
     	    break;
     	}
     	
-        stuff = play(currentPic, jimmy.getSong(), hole.getY() - disc.getY(), hole.getX() - disc.getX());
-        disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(),hole);
-        disc.distFromHole(hole.getX(), hole.getY() );
+        stuff = play(currentPic, jimmy.getSong(), currentHole.getY() - disc.getY(), currentHole.getX() - disc.getX());
+        disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(), currentHole);
     } 
     
-    play(currentPic,jimmy.getSong(), 0,0);
+        play(currentPic,jimmy.getSong(), 0,0);
+}
+
+
+int main( int argv, char* argc[])
+{
+    
+    int hole1t[] = {25,75,-10,10};
+    Hole Hole1 = Hole(100, -5, hole1t);
+    int hole6t[] = {25,75,-10,10};
+    Hole Hole6 = Hole(100, -5, hole6t);
+    int hole9t[] = {25,75,-10,10};
+    Hole Hole9 = Hole(100, -5, hole9t);
+    
+    int currentHole = 1;    
+    
+    while( currentHole < 4)
+    {
+        switch( currentHole )
+        {
+            case 1: 
+              playHole("Hole1", Hole1);
+            break;
+            case 2: 
+              playHole("Hole6", Hole6);
+            break;
+            case 3: 
+              playHole("Hole9", Hole9);
+            break;
+        }  
+        
+        currentHole++;
+    }
     
     clean_up();
     
