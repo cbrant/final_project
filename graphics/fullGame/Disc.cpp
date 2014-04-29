@@ -112,74 +112,74 @@ std::string Disc::pickScreen(int num) {
 	switch(num) {
 		case 1: 
 			if(x < 25) {
-				return "../../pictures/Hole1/Hole1Start";
+				return "../../pictures/Hole1/Hole1Start.png";
 			} else if(x < 75) {
 				if(y < -20) {
-					return "../../pictures/Hole1/Hole1Left";
+					return "../../pictures/Hole1/Hole1Left.png";
 				} else if(y < 20) {
-					return "../../pictures/Hole1/Hole1Middle";
+					return "../../pictures/Hole1/Hole1Middle.png";
 				} else {
-					return "../../pictures/Hole1/Hole1Right";
+					return "../../pictures/Hole1/Hole1Right.png";
 				}
 			} else {
 				if(y < -5) {
-					return "../../pictures/Hole1/Hole1EndLeft";
+					return "../../pictures/Hole1/Hole1EndLeft.png";
 				} else { 
-					return "../../pictures/Hole1/Hole1EndRight";
+					return "../../pictures/Hole1/Hole1EndRight.png";
 				}
 			}
 			break;
 		case 2: 
 			if(x < 20) {
-				return "../../pictures/Hole2/Hole2Start";
+				return "../../pictures/Hole2/Hole2Start.png";
 			} else if(x < 40) {
-				return "../../pictures/Hole2/Hole2Middle";
+				return "../../pictures/Hole2/Hole2Middle.png";
 			} else if(x < 60) {
-				return "../../pictures/Hole2/Hole2Three";				
+				return "../../pictures/Hole2/Hole2Three.png";				
 			} else {
-				return "../../pictures/Hole2/Hole2End";				
+				return "../../pictures/Hole2/Hole2End.png";				
 			}
 			break;
 		case 3: 
 			if(x < 25) {
-				return "../../pictures/Hole3/Hole3Start";
+				return "../../pictures/Hole3/Hole3Start.png";
 			} else if(x < 50) {
-				return "../../pictures/Hole3/Hole3Middle";
+				return "../../pictures/Hole3/Hole3Middle.png";
 			} else {
-				return "../../pictures/Hole3/Hole3End";				
+				return "../../pictures/Hole3/Hole3End.png";				
 			}
 			break;
 		case 4:
 			if(x < 30) {
-				return "../../pictures/Hole4/Hole4Start";
+				return "../../pictures/Hole4/Hole4Start.png";
 			} else if(x < 60) {
 				if(y < -15) {
-					return "../../pictures/Hole4/Hole4Left";
+					return "../../pictures/Hole4/Hole4Left.png";
 				} else if(y < 15) {
-					return "../../pictures/Hole4/Hole4Middle";
+					return "../../pictures/Hole4/Hole4Middle.png";
 				} else {
-					return "../../pictures/Hole4/Hole4Right";
+					return "../../pictures/Hole4/Hole4Right.png";
 				}
 			} else {
 				if(y < 15) {
-					return "../../pictures/Hole4/Hole4EndLeft";
+					return "../../pictures/Hole4/Hole4EndLeft.png";
 				} else { 
-					return "../../pictures/Hole4/Hole4EndRight";
+					return "../../pictures/Hole4/Hole4EndRight.png";
 				}
 			} 
 			break;
 		case 5:
 			if(x < 20) {
-				return "../../pictures/Hole5/Hole5Start";
+				return "../../pictures/Hole5/Hole5Start.png";
 			} else if(x < 40) {
-					return "../../pictures/Hole5/Hole5Middle";
+					return "../../pictures/Hole5/Hole5Middle.png";
 			} else {
 				if(y < 0) {
-					return "../../pictures/Hole5/Hole5EndLeft";
+					return "../../pictures/Hole5/Hole5EndLeft.png";
 				} else if(y < 15) {
-					return "../../pictures/Hole5/Hole5End";
+					return "../../pictures/Hole5/Hole5End.png";
 				} else { 
-					return "../../pictures/Hole5/Hole5EndRight";
+					return "../../pictures/Hole5/Hole5EndRight.png";
 				}
 			} 
 			break;

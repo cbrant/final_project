@@ -23,7 +23,7 @@ class Disc {
 		void calcXspot(int, double);
 		void calcYspot(int, double);
 		void distFromHole(int, int);
-		int pickScreen(int*);
+		string pickScreen(int);
 	
 		double getX();
 		double getY();

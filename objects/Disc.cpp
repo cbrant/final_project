@@ -100,8 +100,22 @@ void Disc::calcYspot(int angle, double dist) {
 	return;
 }
 
-int Disc::pickScreen(int* thresholds) {
-	int* arr = thresholds;
+string Disc::pickScreen(int num) {
+	
+	switch(num) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		default:
+			cout << "NOOO" << endl;	
+	}
 	
 	if(x < arr[0]) {
 		cout << "Picking screen 0" << endl;

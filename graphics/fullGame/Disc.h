@@ -25,7 +25,7 @@ class Disc {
 		void calcXspot(int, double);
 		void calcYspot(int, double);
 		void distFromHole(int, int);
-		std::string pickScreen(int);
+		string pickScreen(int);
 	
 		double getX();
 		double getY();
