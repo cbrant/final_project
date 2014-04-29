@@ -175,11 +175,11 @@ std::string Disc::pickScreen(int num) {
 					return "../../pictures/Hole5/Hole5Middle";
 			} else {
 				if(y < 0) {
-					return "../../pictures/Hole5/Hole5EndLeft";
+					return "../../pictures/Hole4/Hole4EndLeft";
 				} else if(y < 15) {
-					return "../../pictures/Hole5/Hole5End";
+				
 				} else { 
-					return "../../pictures/Hole5/Hole5EndRight";
+					return "../../pictures/Hole4/Hole4EndRight";
 				}
 			} 
 			break;

@@ -1031,46 +1031,33 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
 }
 
 
-void playHole( std::string holeName, Hole currentHole, int *score )
+void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
 {
     
-    double* stuff;
-    
+    double* stuff;   
     int scoreHole = 0 ;
-     
-    Player jimmy = Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");   
     Disc disc;
+    int past;
+    int diff;
     
     std::string currentPic;
     
-     while( !disc.checkHole(currentHole.getX(), currentHole.getY()) )
+     while( !disc.checkHole(currentHole.getX(), currentHole.getY()) && !past)
     {
-    	switch(disc.pickScreen(currentHole.getThresh()))
-    	{
-    	    case 0:
-    	      currentPic = "../../pictures/"+holeName+"/Start.png";
-    	    break;
-    	    case 1:
-    	      currentPic = "../../pictures/"+holeName+"/Left.png";
-    	    break;
-    	    case 2:
-    	      currentPic = "../../pictures/"+holeName+"/Middle.png";
-    	    break;
-    	    case 3:
-    	      currentPic = "../../pictures/"+holeName+"/Right.png";
-    	    break;
-    	    case 4:
-    	      currentPic = "../../pictures/"+holeName+"/End.png";
-    	    break;
-    	    default:
-    	      currentPic = "../../pictures/"+holeName+"/Start.png";
-    	    break;
-    	}
+    	currentPic = disc.pickScreen(holeName);
     	
         stuff = play(currentPic, jimmy.getSong(), currentHole.getY() - disc.getY(), currentHole.getX() - disc.getX(), *score, scoreHole);
         disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(), currentHole);
         (*score)++;
         scoreHole++;
+        
+         if(disc.getX() > currentHole.getX()) {
+        	past = 1;
+        	cout << "You passed the hole. Auto score set to 8." << endl;
+        	diff = 8 - scoreHole;
+        	scoreHole = 8;
+        	(*score) += diff;
+        }
     } 
     
         play(currentPic,jimmy.getSong(), 0,0, *score, scoreHole);
@@ -1079,30 +1066,55 @@ void playHole( std::string holeName, Hole currentHole, int *score )
 
 int main( int argv, char* argc[])
 {
-    
-    int hole1t[] = {25,75,-10,10};
-    Hole Hole1 = Hole(100, -5, hole1t);
-    int hole6t[] = {50,75,-10,10};
-    Hole Hole6 = Hole(50, 33, hole6t);
-    int hole9t[] = {25,60,-10,10};
-    Hole Hole9 = Hole(75, 0, hole9t);
+    Hole Hole1 = Hole(100, -5);
+    Hole Hole2 = Hole(80, 20);
+    Hole Hole3 = Hole(75, -10);
+    Hole Hole4 = Hole(90, 0);
+    Hole Hole5 = Hole(60, 15);
     
     int score = 0;
-    
     int currentHole = 1;    
+    int player = 0;   
     
-    while( currentHole < 4)
+    //call title screen
+    //player = titleScreen();
+    //return num 1-4
+    
+    switch(player) {
+    	case 1:
+    		Player jimmy = Player("Jimmy Mickle",5,4,"../../music/Harder_than_you_think.wav");
+    		break;
+    	case 2:
+    		Player jimmy = Player("Nick Lance",4,5,"../../music/Mind_heist.wav");
+    		break;
+    	case 3:
+    		Player jimmy = Player("Dylan Freechild",3,5,"../../music/Who_did_that_to_you.wav");
+    		break;
+    	case 4:
+    		Player jimmy = Player("Dan Bolivar",2,2,"../../music/Hymn.wav");
+    		break;
+    	default:
+    		cout << "NOOOO" << endl;
+    }
+    
+    while( currentHole < 6)
     {
         switch( currentHole )
         {
             case 1: 
-              playHole("Hole1", Hole1, &score);
+              playHole(1, Hole1, jimmy, &score);
             break;
             case 2: 
-              playHole("Hole6", Hole6, &score);
+              playHole(2, Hole2, jimmy, &score);
             break;
             case 3: 
-              playHole("Hole9", Hole9, &score);
+              playHole(3, Hole3, jimmy, &score);
+            break;
+            case 4: 
+              playHole(4, Hole4, jimmy, &score);
+            break;
+            case 5: 
+              playHole(5, Hole5, jimmy, &score);
             break;
         }  
         

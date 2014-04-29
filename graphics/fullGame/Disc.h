@@ -9,7 +9,9 @@ interface of Disc object
 #define DISC_H
 
 #include "Hole.h"
+#include <iostream>
 
+using namespace std;
 
 class Disc {
 
@@ -23,7 +25,7 @@ class Disc {
 		void calcXspot(int, double);
 		void calcYspot(int, double);
 		void distFromHole(int, int);
-		int pickScreen(int*);
+		std::string pickScreen(int);
 	
 		double getX();
 		double getY();
