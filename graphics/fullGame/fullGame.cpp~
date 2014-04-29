@@ -741,6 +741,7 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
           return stats;
      }
      
+    //Display missed hole
     if(horzDist == -6 && vertDist == -6)
     {
          hitText = TTF_RenderText_Solid( font2, "You Missed the Hole!", textColor2);
@@ -751,6 +752,23 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          double stats[] = {power,alpha,angle}; 
           return stats;
      }
+     
+     //Display end screen
+     if(horzDist == -7 && vertDist == -7)
+    {
+         hitText = TTF_RenderText_Solid( font2, "Congrats!", textColor2);
+         scoreText = TTF_RenderText_Solid( font2, s5.c_str(), textColor2 );
+         message = TTF_RenderText_Solid( font2, "Total Score: ", textColor2);
+         apply_surface( 0, 0, background, screen);
+         apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 4, hitText, screen);
+         apply_surface( (SCREEN_WIDTH - scoreText->w ) / 2, 3 * (SCREEN_HEIGHT - scoreText->h ) / 4, scoreText, screen);
+         apply_surface( (SCREEN_WIDTH - message->w ) / 2, (SCREEN_HEIGHT - message->h ) / 2, message, screen);
+         SDL_Flip( screen );
+         usleep(500000);
+         double stats[] = {power,alpha,angle}; 
+          return stats;
+     }
+
 
      
     //loop until the user quits       
@@ -1057,7 +1075,7 @@ void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
     {
     	currentPic = disc.pickScreen(holeName);
     	
-    	cout << currentPic << endl;
+    	//cout << currentPic << endl;
     	
         stuff = play(currentPic, jimmy.getSong(), currentHole.getY() - disc.getY(), currentHole.getX() - disc.getX(), *score, scoreHole);
         disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(), currentHole);
@@ -1076,6 +1094,9 @@ void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
 		play(currentPic,jimmy.getSong(), -6, -6, *score, scoreHole);  
         else
 		play(currentPic,jimmy.getSong(), 0,0, *score, scoreHole);
+	
+	if( holeName == 5)
+		play("../../pictures/Pat_being_a_goon.png",jimmy.getSong(), -7,-7, *score, 0);
 }
 
 
@@ -1114,6 +1135,7 @@ int main( int argv, char* argc[])
     		myPlayer = &dan;
     		break;
     	default:
+    		myPlayer = &jimmy;
     		cout << "NOOOO" << endl;
 		break;
     }
