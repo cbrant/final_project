@@ -741,6 +741,17 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
           return stats;
      }
      
+    if(horzDist == -6 && vertDist == -6)
+    {
+         hitText = TTF_RenderText_Solid( font2, "You Missed the Hole!", textColor2);
+         apply_surface( 0, 0, background, screen);
+         apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
+         SDL_Flip( screen );
+         usleep(500000);
+         double stats[] = {power,alpha,angle}; 
+          return stats;
+     }
+
      
     //loop until the user quits       
     while( quit == false )
@@ -1059,8 +1070,10 @@ void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
         	(*score) += diff;
         }
     } 
-    
-        play(currentPic,jimmy.getSong(), 0,0, *score, scoreHole);
+   	if( past )
+		play(currentPic,jimmy.getSong(), -6, -6, *score, scoreHole);  
+        else
+		play(currentPic,jimmy.getSong(), 0,0, *score, scoreHole);
 }
 
 
@@ -1074,27 +1087,33 @@ int main( int argv, char* argc[])
     
     int score = 0;
     int currentHole = 1;    
-    int player = 0;   
+    int player = 1;   
     
     //call title screen
     //player = titleScreen();
     //return num 1-4
-    
+    Player jimmy = Player("Jimmy Mickle",5,4,"../../music/Harder_than_you_think.wav");
+    Player nick = Player("Nick Lance",4,5,"../../music/Mind_heist.wav");
+    Player dylan = Player("Dylan Freechild",3,5,"../../music/Who_did_that_to_you.wav");
+    Player dan = Player("Dan Bolivar",2,2,"../../music/Hymn.wav");
+    Player *myPlayer = NULL;
+ 
     switch(player) {
     	case 1:
-    		Player jimmy = Player("Jimmy Mickle",5,4,"../../music/Harder_than_you_think.wav");
+    		myPlayer = &jimmy;
     		break;
     	case 2:
-    		Player jimmy = Player("Nick Lance",4,5,"../../music/Mind_heist.wav");
+    		myPlayer = &nick;
     		break;
     	case 3:
-    		Player jimmy = Player("Dylan Freechild",3,5,"../../music/Who_did_that_to_you.wav");
+    		myPlayer = &dylan;
     		break;
     	case 4:
-    		Player jimmy = Player("Dan Bolivar",2,2,"../../music/Hymn.wav");
+    		myPlayer = &dan;
     		break;
     	default:
     		cout << "NOOOO" << endl;
+		break;
     }
     
     while( currentHole < 6)
@@ -1102,19 +1121,19 @@ int main( int argv, char* argc[])
         switch( currentHole )
         {
             case 1: 
-              playHole(1, Hole1, jimmy, &score);
+              playHole(1, Hole1, *myPlayer, &score);
             break;
             case 2: 
-              playHole(2, Hole2, jimmy, &score);
+              playHole(2, Hole2, *myPlayer, &score);
             break;
             case 3: 
-              playHole(3, Hole3, jimmy, &score);
+              playHole(3, Hole3, *myPlayer, &score);
             break;
             case 4: 
-              playHole(4, Hole4, jimmy, &score);
+              playHole(4, Hole4, *myPlayer, &score);
             break;
             case 5: 
-              playHole(5, Hole5, jimmy, &score);
+              playHole(5, Hole5, *myPlayer, &score);
             break;
         }  
         
