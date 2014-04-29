@@ -108,6 +108,8 @@ SDL_Surface *p15 = NULL;
 SDL_Surface *horzText = NULL;
 SDL_Surface *vertText = NULL;
 SDL_Surface *hitText = NULL;
+SDL_Surface *scoreText = NULL;
+SDL_Surface *scoreHoleText = NULL;
 SDL_Surface *screen = NULL;
 
 //Initialize font
@@ -168,7 +170,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination,
            
 bool init()
 {
-    std::cout<<"Initilizing..."<<std::endl;
+    std::cout<<"Initializing..."<<std::endl;
     
     //Initilize SDL
     if( SDL_Init( SDL_INIT_EVERYTHING ) == -1)
@@ -401,6 +403,8 @@ void clean_up()
     SDL_FreeSurface (p15);
     SDL_FreeSurface (horzText);
     SDL_FreeSurface (vertText);
+    SDL_FreeSurface (scoreText);
+    SDL_FreeSurface (scoreHoleText);
     SDL_FreeSurface (hitText);
     
     Mix_FreeMusic(music);
@@ -630,7 +634,7 @@ void fly_away(int direction)
     }
 }
 
-double* play( std::string backgroundFile, std::string musicFile, double horzDist, double vertDist )
+double* play( std::string backgroundFile, std::string musicFile, double horzDist, double vertDist, int score, int scoreHole )
 {
     //quit program flag
     bool quit = false;
@@ -680,6 +684,22 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
     //max and min for power 
     int maxPower = 15;
     int minPower =0;
+    
+    //set score surfaces
+    std::stringstream ss3,ss4;
+    ss3.str(""); // empty the stringstream
+    ss3.clear();
+    ss4.str(""); // empty the stringstream
+    ss4.clear();
+    ss3 << score;
+    ss4 << scoreHole;
+    std::string s5= "Total Score: " + ss3.str();
+    std::string s6= "Hole Score: " + ss4.str();
+    scoreText = TTF_RenderText_Solid( font, s5.c_str(), textColor ); 
+    scoreHoleText = TTF_RenderText_Solid( font, s6.c_str(), textColor );
+    
+    int xposScore = ( ( SCREEN_WIDTH - scoreText->w ) - 2)  ;
+    int yposScore = 10;
     
     //textual representation of the distance to hole
     std::stringstream ss1,ss2;
@@ -744,6 +764,9 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( xposAngle, yposAngle, currentAngle, screen);
          apply_surface( xposDistance, yposDistance, horzText, screen);
          apply_surface( xposDistance, yposDistance +35 , vertText, screen);
+         apply_surface( xposScore, yposScore, scoreText, screen);
+         apply_surface( xposScore, yposScore + 35, scoreHoleText, screen);
+         
          
          //If there is no music playing
          if( Mix_PlayingMusic() == 0 )
@@ -1008,10 +1031,12 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
 }
 
 
-void playHole( std::string holeName, Hole currentHole )
+void playHole( std::string holeName, Hole currentHole, int *score )
 {
     
     double* stuff;
+    
+    int scoreHole = 0 ;
      
     Player jimmy = Player("Jimmy Mickle",4,4,"../../music/Harder_than_you_think.wav");   
     Disc disc;
@@ -1042,11 +1067,13 @@ void playHole( std::string holeName, Hole currentHole )
     	    break;
     	}
     	
-        stuff = play(currentPic, jimmy.getSong(), currentHole.getY() - disc.getY(), currentHole.getX() - disc.getX());
+        stuff = play(currentPic, jimmy.getSong(), currentHole.getY() - disc.getY(), currentHole.getX() - disc.getX(), *score, scoreHole);
         disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(), currentHole);
+        (*score)++;
+        scoreHole++;
     } 
     
-        play(currentPic,jimmy.getSong(), 0,0);
+        play(currentPic,jimmy.getSong(), 0,0, *score, scoreHole);
 }
 
 
@@ -1055,10 +1082,12 @@ int main( int argv, char* argc[])
     
     int hole1t[] = {25,75,-10,10};
     Hole Hole1 = Hole(100, -5, hole1t);
-    int hole6t[] = {25,75,-10,10};
-    Hole Hole6 = Hole(100, -5, hole6t);
-    int hole9t[] = {25,75,-10,10};
-    Hole Hole9 = Hole(100, -5, hole9t);
+    int hole6t[] = {50,75,-10,10};
+    Hole Hole6 = Hole(50, 33, hole6t);
+    int hole9t[] = {25,60,-10,10};
+    Hole Hole9 = Hole(75, 0, hole9t);
+    
+    int score = 0;
     
     int currentHole = 1;    
     
@@ -1067,13 +1096,13 @@ int main( int argv, char* argc[])
         switch( currentHole )
         {
             case 1: 
-              playHole("Hole1", Hole1);
+              playHole("Hole1", Hole1, &score);
             break;
             case 2: 
-              playHole("Hole6", Hole6);
+              playHole("Hole6", Hole6, &score);
             break;
             case 3: 
-              playHole("Hole9", Hole9);
+              playHole("Hole9", Hole9, &score);
             break;
         }  
         
