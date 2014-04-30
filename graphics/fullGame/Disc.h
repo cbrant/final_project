@@ -15,6 +15,7 @@ using namespace std;
 
 class Disc {
 
+	//see implementation for function explanations
 	public:
 		Disc();
 		

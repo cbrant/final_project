@@ -10,6 +10,7 @@ interface of Hole object
 
 using namespace std;
 
+//main constructor
 Hole::Hole(int X, int Y) {
 	x = X;
 	y = Y;
@@ -17,6 +18,7 @@ Hole::Hole(int X, int Y) {
 	isHit = 0; //initially unhit
 }
 
+//print function for Hole object
 void Hole::print() {
 	cout << "Printing hole." << endl << "The hole is located " << x << " meters forward ";
 	if(y < 0) {
@@ -35,10 +37,12 @@ void Hole::print() {
 	cout << endl << endl;*/
 }
 
+//getter for x pos
 int Hole::getX() {
 	return x;
 }
 
+//getter for y pos
 int Hole::getY() {
 	return y;
 }

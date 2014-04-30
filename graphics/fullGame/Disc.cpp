@@ -12,6 +12,7 @@ implemenation of Disc object
 
 using namespace std;
 
+//constructor
 Disc::Disc() {
 	x = 0;
 	y = 0;
@@ -20,6 +21,7 @@ Disc::Disc() {
 	vz = 0;
 }
 
+//function that animates the flight of the disc with actual physics
 void Disc::letFly(double power, double uAlpha, int throwAngle,  int playerPower, int playerAccuracy, Hole hole) {
 	
 	//get random seed
@@ -76,32 +78,33 @@ void Disc::letFly(double power, double uAlpha, int throwAngle,  int playerPower,
 		calcXspot(throwAngle, vx*dt);
 		
 		if(checkHole(hole.getX(), hole.getY())) {
-			cout << "\n\nHit the hole!!!\n\n" << endl;
+			//cout << "\n\nHit the hole!!!\n\n" << endl;
 			break;
 		}
 	}
 
 	//cout << "Time was " << count*dt << " seconds." << endl;
-	cout << "letFly(): The disc traveled " << dist << " meters." << endl;
-	
-
-	//pickScreen(hole.getThresh());
+	//cout << "letFly(): The disc traveled " << dist << " meters." << endl;
 	
 	return;
 }
 
+//calculate the disc's spot in the x direction
 void Disc::calcXspot(int angle, double dist) {
 	x = x + dist*cos(angle*M_PI/180);
 	return;
 }
 
+//calculate the disc's spot in the y direction
 void Disc::calcYspot(int angle, double dist) {
 	y = y + dist*sin(angle*M_PI/180);
 	return;
 }
 
+//pick screen algorithm based on disc's position
 std::string Disc::pickScreen(int num) {
 	/*
+	Thresholds for each hole in array form...not used but here for reference
 	int hole1t[] = {25,75,-20,20,-5};
     int hole2t[] = {20,40,60};
     int hole3t[] = {25, 50};
@@ -186,42 +189,25 @@ std::string Disc::pickScreen(int num) {
 		default:
 			cout << "NOOO" << endl;
 	}
-	
-	/*
-	if(x < arr[0]) {
-		cout << "Picking screen 0" << endl;
-		return 0;
-	} else if (x > arr[1]) {
-		cout << "Picking screen 4" << endl;
-		return 4;
-	} else {
-		if(y < arr[2]) {
-			cout << "Picking screen 1" << endl;
-			return 1;
-		} else if(y > arr[3]) {
-			cout << "Picking screen 3" << endl;
-			return 3;
-		} else {
-			cout << "Picking screen 2" << endl;
-			return 2;
-		}
-	}
-	*/
 }
 
+//getter for x pos
 double Disc::getX() {
 	return x;
 }
 
+//getter for y pos
 double Disc::getY() {
 	return y;
 }
 
+//print function for Disc object
 void Disc::print() {
 	cout << "Location is (" << x << ", " << y << ")...relative to starting at (0,0)." << endl;
 	return;
 }
 
+//function to check if disc is within acceptable range of hole
 int Disc::checkHole(int xHole, int yHole) {
 	if(abs(x - xHole) < 5 && abs(y - yHole) < 5) {
 		return 1;
@@ -229,6 +215,7 @@ int Disc::checkHole(int xHole, int yHole) {
 	return 0;
 }
 
+//prints the disc's distance from the current hole
 void Disc::distFromHole(int holex, int holey) {
 	cout << "The disc is " << abs(x - holex) << " meters from the hole in the x-dir and " << abs(y - holey) << " in the y-dir." << endl;
 }
