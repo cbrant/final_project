@@ -9,6 +9,8 @@ interface of Hole object
 #define HOLE_H
 
 class Hole {
+	
+	//see implementation for function explanations
 	public:
 		
 		Hole(int, int);

@@ -10,6 +10,7 @@ implementation of Player object
 
 using namespace std;
 
+//main constructor
 Player::Player (string n, int pow, int acc, string son) {
 	name = n;
 	power = pow;
@@ -17,19 +18,23 @@ Player::Player (string n, int pow, int acc, string son) {
 	song = son;
 }
 
+//getter for power
 int Player::getPower() {
 	return power;
 }
 
+//getter for accuracy
 int Player::getAccuracy() {
 	return accuracy;
 }
 
+//print function for Player object
 void Player::print() {
 	cout << "Printing player." << endl << "Player name: " << name << endl << "Power: " << power << " Accuracy: " << accuracy << endl;
 	return;
 }
 
+//getter for song
 string Player::getSong() {
 	return song;
 }
