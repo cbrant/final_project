@@ -124,6 +124,9 @@ Mix_Music *music = NULL;
 //Event structure
 SDL_Event event;
 
+//array containing graphic controller variables
+double stats[]={0,0,0};
+
 SDL_Surface *load_image ( std::string filename )
 {
     //Image to load
@@ -747,8 +750,10 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
          SDL_Flip( screen );
          usleep(5000000);
-         double stats[] = {power,alpha,angle}; 
-          return stats;
+         stats[0] = power;
+         stats[1] = alpha;
+         stats[2] = angle; 
+         return stats;
      }
      
     //Display missed hole
@@ -759,8 +764,10 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
          SDL_Flip( screen );
          usleep(5000000);
-         double stats[] = {power,alpha,angle}; 
-          return stats;
+         stats[0] = power;
+         stats[1] = alpha;
+         stats[2] = angle; 
+         return stats;
      }
      
      //Display end screen
@@ -773,8 +780,10 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( (SCREEN_WIDTH - scoreText->w ) / 2, 3 * (SCREEN_HEIGHT - scoreText->h ) / 4, scoreText, screen);
          SDL_Flip( screen );
          usleep(5000000);
-         double stats[] = {power,alpha,angle}; 
-          return stats;
+         stats[0] = power;
+         stats[1] = alpha;
+         stats[2] = angle; 
+         return stats;
      }
 
 
@@ -927,7 +936,9 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
                  if( keystates[SDLK_RETURN] )
                  {
                      fly_away(arrowCount);
-                     double stats[] = {power,alpha,angle}; 
+                     stats[0] = power;
+         	     stats[1] = alpha;
+         	     stats[2] = angle; 
                      return stats;
                      //PowerbarGoing = false;
                  }
@@ -1063,7 +1074,9 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
      //clean up the surfaces
      //clean_up();
      
-     double stats[] = {power,alpha,angle}; 
+     stats[0] = power;
+     stats[1] = alpha;
+     stats[2] = angle;
      return stats;
 }
 
