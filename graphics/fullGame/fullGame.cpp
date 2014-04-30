@@ -1155,7 +1155,7 @@ int title_screen(){
 				std::cout << "Chose Freechild" << std::endl;
 				quit = true;
 			}
-			if((x > 54) && (x < 352) && (y>368) && (y < 450)){
+			if((x > 447) && (x < 731) && (y>368) && (y < 450)){
 				choice = 4;
 				std::cout << "Chose Dan" << std::endl;
 				quit = true;
