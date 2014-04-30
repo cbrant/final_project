@@ -1,7 +1,7 @@
 /* Connor Brant
 CSE20212
 Final Project
-hole1module.cpp
+fullGame.cpp
 
 Main program used to create the course. Functionality
 draws from object classes. Used lazyfoo.net tutorials as a guide.
@@ -204,9 +204,9 @@ bool init()
      }
 
     //set a window caption
-    SDL_WM_SetCaption( "Hole 1", NULL );
+    SDL_WM_SetCaption( "ND Frolf: The Video Game", NULL );
     
-    std::cout<<"Initilization successful"<<std::endl;
+    std::cout<<"Initialization successful"<<std::endl;
     return true;
 }
 
@@ -317,7 +317,7 @@ bool load_files( std::string backgroundFile, std::string musicFile )
     {
 	std::cout<<"Music did not load correctly"<<std::endl;
 	return false;
-     }
+    }
 
     std::cout<<"Files loaded correctly"<<std::endl;
     return true;
@@ -325,6 +325,7 @@ bool load_files( std::string backgroundFile, std::string musicFile )
 
 void clean_up()
 {
+    //free all surfaces
     SDL_FreeSurface( background );
     SDL_FreeSurface (frisbee1);
     SDL_FreeSurface (frisbee2);
@@ -375,13 +376,13 @@ void clean_up()
     SDL_FreeSurface (left45);
     SDL_FreeSurface (left30);
     SDL_FreeSurface (left15);
-    SDL_FreeSurface (right45) ;
+    SDL_FreeSurface (right45);
     SDL_FreeSurface (right30);
     SDL_FreeSurface (right15);
     SDL_FreeSurface (angle0);
     SDL_FreeSurface (angle3);
-    SDL_FreeSurface (angle6) ;
-    SDL_FreeSurface (angle9) ;
+    SDL_FreeSurface (angle6);
+    SDL_FreeSurface (angle9);
     SDL_FreeSurface (angle12);
     SDL_FreeSurface (angle15);
     SDL_FreeSurface (message);
@@ -407,13 +408,15 @@ void clean_up()
     SDL_FreeSurface (scoreHoleText);
     SDL_FreeSurface (hitText);
     
+    // free music
     Mix_FreeMusic(music);
-
+    
+    //close fonts
     TTF_CloseFont(font);
     TTF_CloseFont(font2);
 
-     //Quit Mixer
-     Mix_CloseAudio();
+    //Quit Mixer
+    Mix_CloseAudio();
     
     TTF_Quit();
     
@@ -432,7 +435,7 @@ void fly_away(int direction)
     //horizontal angle for the fribee to be thrown  
     double angle = 0;
     
-    //horizontal angle
+    //pick horizontal angle
     switch(direction)
     {
     	case -3:
@@ -461,6 +464,7 @@ void fly_away(int direction)
     	break;
     }
     
+    //calculate display distance to fly
     double maxDistance = ( SCREEN_HEIGHT ) / 4;
     double distDifference =( SCREEN_HEIGHT - frisbee1->h  / 2 ) - maxDistance ; 
     double increment = distDifference / 45;
@@ -616,20 +620,18 @@ void fly_away(int direction)
             break;
         }
         
+        //calculate frisbee position with trig
         yposFrisbee = yposFrisbee - increment;
         xposFrisbee= (( SCREEN_WIDTH - currentFrisbee->w ) / 2) + ( (yposFrisbeeOrig - yposFrisbee)  * tan(angle) );
         
-             
+        //apply frisbee and background
         apply_surface( 0, 0, background, screen);
         apply_surface( xposFrisbee, yposFrisbee, currentFrisbee, screen);
         
         usleep(1000);
         
         //Update the screen
-        if( SDL_Flip( screen ) == -1 )
-        {
-            std::cout<<"Error in updating screen"<<std::endl;
-        }
+        SDL_Flip( screen );
               
     }
 }
@@ -640,10 +642,18 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
     bool quit = false;
    
     //initilize everything
-    init();
-        
+    if( init() == false ) 
+    {
+      clean_up();
+      exit(0);
+    }
+             
     //load in our files
-    load_files( backgroundFile, musicFile );
+    if( load_files( backgroundFile, musicFile ) == false )
+    {
+      clean_up();
+      exit(0);
+    }     
       
      //current powerbar image
     SDL_Surface* currentPowerbar = p0;
@@ -729,14 +739,14 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
      //set up the keystates        
      Uint8* keystates = SDL_GetKeyState( NULL );          
      
-     // hit screen 
+     //display hit screen 
     if(horzDist == 0 && vertDist == 0)
     {
          hitText = TTF_RenderText_Solid( font2, "NICE SHOT!", textColor2);
          apply_surface( 0, 0, background, screen);
          apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
          SDL_Flip( screen );
-         usleep(500000);
+         usleep(5000000);
          double stats[] = {power,alpha,angle}; 
           return stats;
      }
@@ -748,7 +758,7 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( 0, 0, background, screen);
          apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 2, hitText, screen);
          SDL_Flip( screen );
-         usleep(500000);
+         usleep(5000000);
          double stats[] = {power,alpha,angle}; 
           return stats;
      }
@@ -758,11 +768,9 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
     {
          hitText = TTF_RenderText_Solid( font2, "Congrats!", textColor2);
          scoreText = TTF_RenderText_Solid( font2, s5.c_str(), textColor2 );
-         message = TTF_RenderText_Solid( font2, "Total Score: ", textColor2);
          apply_surface( 0, 0, background, screen);
          apply_surface( (SCREEN_WIDTH - hitText->w ) / 2, (SCREEN_HEIGHT - hitText->h ) / 4, hitText, screen);
          apply_surface( (SCREEN_WIDTH - scoreText->w ) / 2, 3 * (SCREEN_HEIGHT - scoreText->h ) / 4, scoreText, screen);
-         apply_surface( (SCREEN_WIDTH - message->w ) / 2, (SCREEN_HEIGHT - message->h ) / 2, message, screen);
          SDL_Flip( screen );
          usleep(5000000);
          double stats[] = {power,alpha,angle}; 
@@ -1062,7 +1070,7 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
 
 void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
 {
-    
+    //array of things to pass from graphics to disc class
     double* stuff;   
     int scoreHole = 0 ;
     Disc disc;
@@ -1077,19 +1085,24 @@ void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
     	
     	//cout << currentPic << endl;
     	
+    	//play the current hole
         stuff = play(currentPic, jimmy.getSong(), currentHole.getY() - disc.getY(), currentHole.getX() - disc.getX(), *score, scoreHole);
+        //throw the frisbee
         disc.letFly(stuff[0],stuff[1],stuff[2],jimmy.getPower(),jimmy.getAccuracy(), currentHole);
+        //track score
         (*score)++;
         scoreHole++;
         
+        //see if disc has passed hole
          if(disc.getX() > currentHole.getX()) {
         	past = 1;
-        	cout << "You passed the hole. Auto score set to 8." << endl;
+        	//cout << "You passed the hole. Auto score set to 8." << endl;
         	diff = 8 - scoreHole;
         	scoreHole = 8;
         	(*score) += diff;
         }
     } 
+    	// determine which end screen to show
    	if( past )
 		play(currentPic,jimmy.getSong(), -6, -6, *score, scoreHole);  
         else
@@ -1102,11 +1115,7 @@ void playHole(int holeName, Hole currentHole, Player jimmy, int *score )
 
 int title_screen(){
 
-	init();
-
-    //Set the window caption
- //   SDL_WM_SetCaption( "ND FROLF: The Video Game", NULL );
-
+    init();
 
     //Load the images
     background = load_image( "../../pictures/title_screen.png" );
@@ -1117,21 +1126,20 @@ int title_screen(){
 
     //Update the screen
     SDL_Flip( screen );
-
-
 	
-	//mouse offsets
-	int x = 0;
-	int y = 0;
-	bool quit;
+    //mouse offsets
+    int x = 0;
+    int y = 0;
+    bool quit;
 
-	int choice;
-	while(quit == false){
+    int choice;
+    while(quit == false){
 
 	if(SDL_PollEvent( &event)){
 
-	if(event.type == SDL_MOUSEBUTTONDOWN){
-		//if left was pressed
+	    if(event.type == SDL_MOUSEBUTTONDOWN)
+	    {
+               //if left was pressed
 		if(event.button.button == SDL_BUTTON_LEFT)
 		{
 			//get offsets
@@ -1161,9 +1169,9 @@ int title_screen(){
 				quit = true;
 			}			
 		}
-	}
-	}
-	}
+	    }
+        }
+    }
 
 return choice;
 }
@@ -1171,6 +1179,7 @@ return choice;
 
 int main( int argv, char* argc[])
 {
+    //create the hole objects
     Hole Hole1 = Hole(100, -5);
     Hole Hole2 = Hole(80, 20);
     Hole Hole3 = Hole(75, -10);
@@ -1184,12 +1193,14 @@ int main( int argv, char* argc[])
     //call title screen
     player = title_screen();
     //return num 1-4
+    //create all four playable characters
     Player jimmy = Player("Jimmy Mickle",5,4,"../../music/Harder_than_you_think.wav");
     Player nick = Player("Nick Lance",4,5,"../../music/Mind_heist.wav");
     Player dylan = Player("Dylan Freechild",3,5,"../../music/Who_did_that_to_you.wav");
     Player dan = Player("Dan Bolivar",2,2,"../../music/Hymn.wav");
     Player *myPlayer = NULL;
  
+    //choose player from title screen
     switch(player) {
     	case 1:
     		myPlayer = &jimmy;
@@ -1205,10 +1216,10 @@ int main( int argv, char* argc[])
     		break;
     	default:
     		myPlayer = &jimmy;
-    		cout << "NOOOO" << endl;
 		break;
     }
     
+    // choose the current hole to play
     while( currentHole < 6)
     {
         switch( currentHole )
@@ -1230,6 +1241,7 @@ int main( int argv, char* argc[])
             break;
         }  
         
+        //increment current hole
         currentHole++;
     }
     
