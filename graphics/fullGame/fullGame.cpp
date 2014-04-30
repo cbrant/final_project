@@ -764,7 +764,7 @@ double* play( std::string backgroundFile, std::string musicFile, double horzDist
          apply_surface( (SCREEN_WIDTH - scoreText->w ) / 2, 3 * (SCREEN_HEIGHT - scoreText->h ) / 4, scoreText, screen);
          apply_surface( (SCREEN_WIDTH - message->w ) / 2, (SCREEN_HEIGHT - message->h ) / 2, message, screen);
          SDL_Flip( screen );
-         usleep(500000);
+         usleep(5000000);
          double stats[] = {power,alpha,angle}; 
           return stats;
      }
